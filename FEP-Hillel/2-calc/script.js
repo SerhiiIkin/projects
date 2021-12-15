@@ -1,35 +1,34 @@
-function add(mathAction) {
+function math() {
+    const mathAction = prompt("What you want to do ? (+ - / *");
+    const firstNumber = +prompt("Writte first number:");
+    const secondNumber = +prompt("Writte second number:");
+    result(mathAction, firstNumber, secondNumber);
+}
+
+const result = function (mathAction, firstNumber, secondNumber) {
+    if (isNaN(firstNumber)) {
+        console.error("Wrong enter first number!");
+        return;
+    }
+    if (isNaN(secondNumber)) {
+        console.error("Wrong enter second number!");
+        return;
+    }
     if (mathAction === "+") {
         console.log(`${firstNumber} ${mathAction} ${secondNumber} = ${firstNumber + secondNumber}`);
         return;
-    }
-}
-
-function sub(mathAction) {
-    if (mathAction === "*") {
-        console.log(`${firstNumber} ${mathAction} ${secondNumber} = ${firstNumber * secondNumber}`);
-        return;
-    }
-}
-
-function mult(mathAction) {
-    if (mathAction === "-") {
-        console.log(`${firstNumber} ${mathAction} ${secondNumber} = ${firstNumber - secondNumber}`);
-        return;
-    }
-}
-
-function div(mathAction) {
-    if (mathAction === "/") {
+    } else if (mathAction === "/") {
         console.log(`${firstNumber} ${mathAction} ${secondNumber} = ${firstNumber / secondNumber}`);
         return;
+    } else if (mathAction === "*") {
+        console.log(`${firstNumber} ${mathAction} ${secondNumber} = ${firstNumber * secondNumber}`);
+        return;
+    } else if (mathAction === "-") {
+        console.log(`${firstNumber} ${mathAction} ${secondNumber} = ${firstNumber - secondNumber}`);
+        return;
+    } else {
+        console.error("You need to write right action!");
     }
+    return;
 }
-
-const mathAction = prompt("What you want to do ? (+ - / *");
-const firstNumber = +prompt("Writte first number:");
-const secondNumber = +prompt("Writte second number:");
-const resultAdd = add(mathAction, firstNumber, secondNumber);
-const resultSub = sub(mathAction, firstNumber, secondNumber);
-const resultMult = mult(mathAction, firstNumber, secondNumber);
-const resultDiv = div(mathAction, firstNumber, secondNumber);
+math();
