@@ -14,7 +14,33 @@ function math() {
         let input;
         do {
             input = +prompt(`Writte number #${num}`);
-        } while (isNaN(input));
+        } while (inputError(input) !== true);
+
+        function inputError(input) {
+            if (isNaN(input)) {
+                alert("You can write only numbers!");
+                return false;
+            } else {
+                return true;
+            }
+        }
+        return input;
+    }
+
+    function getAction() {
+        let input;
+        do {
+            input = prompt("What you want to do ? ( + - / * )");
+        } while (inputError(input) !== true);
+
+        function inputError(input) {
+            if (input !== "+" && input !== "-" && input !== "*" && input !== "/") {
+                alert("Writte correct symbol!");
+                return false;
+            } else {
+                return true;
+            }
+        }
         return input;
     }
 
@@ -49,22 +75,7 @@ function math() {
         return firstNumber / secondNumber;
     }
 
-    function getAction() {
-        let input;
-        do {
-            input = prompt("What you want to do ? ( + - / * )");
-        } while (inputMath(input) !== true);
 
-        function inputMath(input) {
-            if (input !== "+" && input !== "-" && input !== "*" && input !== "/") {
-                alert("Writte correct symbol!");
-                return false;
-            } else {
-                return true;
-            }
-        }
-        return input;
-    }
 }
 
 
