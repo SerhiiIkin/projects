@@ -1,9 +1,15 @@
 function math() {
     const ACTION = {
-        "+": add,
-        "-": mul,
-        "/": div,
-        "*": sub
+        "+": allAction,
+        "-": allAction,
+        "/": allAction,
+        "*": allAction
+    };
+    const ACTION_SHOW = {
+        2: showConsole,
+        3: showConsole,
+        4: showConsole,
+        5: showConsole
     };
     const ACTION_LIST = Object.keys(ACTION);
     const mathAction = getAction();
@@ -15,6 +21,7 @@ function math() {
 
     function getAction() {
         let input;
+
         do {
             input = prompt(`What you want to do ? ${ACTION_LIST.join(" ")}`);
         } while (!actionError(input));
@@ -26,11 +33,13 @@ function math() {
                 return true;
             }
         }
+
         return input;
     }
 
     function getNumberLong() {
         let howMuch;
+
         do {
             howMuch = +prompt(`How many digits, do you want to write? It is possible to enter only numbers from 1 to 5`);
         } while (!numberLongError(howMuch));
@@ -42,14 +51,17 @@ function math() {
                 return true;
             }
         }
+
         return howMuch;
     }
 
     function getNumber(howMuch) {
         let inputNumbers = [];
         let i, j, element;
+
         for (i = 0, j = 1; i < howMuch; i++, j++) {
             do {
+
                 inputNumbers[i] = +prompt(`Writte number #${j}`);
                 element = inputNumbers[i];
             } while (!numberError(element));
@@ -62,72 +74,37 @@ function math() {
                 return true;
             }
         }
+
         return inputNumbers;
     }
 
     function calc(mathAction, number) {
-        if (mathAction === "+") {
-            return add(number);
-        } else if (mathAction === "/") {
-            return div(number);
-        } else if (mathAction === "*") {
-            return sub(number);
-        } else if (mathAction === "-") {
-            return mul(number);
-        } else {
-            return "You need to write right action!";
-        }
+        return ACTION[mathAction](number);
     }
 
-    function add(number) {
-        let result = number.reduce(function (sum, current) {
-            return sum + current;
-        }, 0);
-        return result;
-    }
+    function allAction(number) {
+        let result = number.reduce(function (action, current) {
+            switch (mathAction) {
+                case "+":
+                    return action + current;
+                case "-":
+                    return action - current;
+                case "*":
+                    return action * current;
+                case "/":
+                    return action / current;
+            }
+        });
 
-    function mul(number) {
-        let result = number.reduce(function (mul, current) {
-            return mul - current;
-        })
-        return result;
-    }
-
-    function sub(number) {
-        let result = number.reduce(function (sub, current) {
-            return sub * current;
-        })
-        return result;
-    }
-
-    function div(number) {
-        let result = number.reduce(function (div, current) {
-            return div / current;
-        })
         return result;
     }
 
     function showResult(mathAction, number, result, howMuch) {
+        return ACTION_SHOW[howMuch](number);
+    }
 
-        switch (howMuch) {
-            case 2:
-                console.log(`${number[0]} ${mathAction} ${number[1]} = ${result}`);
-                break;
-            case 3:
-                console.log(`${number[0]} ${mathAction} ${number[1]} ${mathAction} ${number[2]} = ${result}`);
-                break;
-            case 4:
-                console.log(`${number[0]} ${mathAction} ${number[1]} ${mathAction} ${number[2]} ${mathAction} ${number[3]} = ${result}`);
-                break;
-            case 5:
-                console.log(`${number[0]} ${mathAction} ${number[1]} ${mathAction} ${number[2]} ${mathAction} ${number[3]} ${mathAction} ${number[4]} = ${result}`);
-                break;
-
-            default:
-                console.log("You entered the wrong number of numbers");
-                break;
-        }
-
+    function showConsole(number) {
+        console.log(`${number.join(" " + mathAction + " ")} = ${result}`);
     }
 
 }
