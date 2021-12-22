@@ -41,7 +41,7 @@ function math() {
         let howMuch;
 
         do {
-            howMuch = +prompt(`How many digits, do you want to write? It is possible to enter only numbers from 1 to 5`);
+            howMuch = prompt(`How many digits, do you want to write? It is possible to enter only numbers from 2 to 5`);
         } while (!numberLongError(howMuch));
 
         function numberLongError(howMuch) {
@@ -52,7 +52,7 @@ function math() {
             }
         }
 
-        return howMuch;
+        return +howMuch;
     }
 
     function getNumber(howMuch) {
@@ -62,20 +62,20 @@ function math() {
         for (i = 0, j = 1; i < howMuch; i++, j++) {
             do {
 
-                inputNumbers[i] = +prompt(`Writte number #${j}`);
+                inputNumbers[i] = prompt(`Writte number #${j}`);
                 element = inputNumbers[i];
             } while (!numberError(element));
         }
 
         function numberError(element) {
-            if (isNaN(element)) {
+            if (isNaN(element) || !element || element === " ") {
                 alert("You can write only numbers!");
             } else {
                 return true;
             }
         }
 
-        return inputNumbers;
+        return inputNumbers.map(Number);
     }
 
     function calc(mathAction, number) {
