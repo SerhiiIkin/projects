@@ -21,11 +21,12 @@ const students = [
     }
 ]
 
-const id = getId();
+const id = createId();
 const avarageStudentMark = avarageMark();
 const avarageGroupMark = avarageGroup();
+const result = showResult(avarageStudentMark,avarageGroupMark);
 
-function getId() {
+function createId() {
     let id = 10;
     return id;
 }
@@ -33,26 +34,27 @@ function getId() {
 function avarageMark() {
 
     let getIdMas = students.find(item => item.id == id );
-    let avarage = sum(getIdMas.marks);
+    let avarage = calcSum(getIdMas.marks);
 
     return avarage;
 }
-
-console.log(avarageStudentMark);
 
 function avarageGroup() {
     let allMarks = [];
 
     for (let key of students) {
-        allMarks.push(sum(key.marks));
+        allMarks.push(calcSum(key.marks));
     }
-    let allGroupMarks = sum(allMarks);
+    let allGroupMarks = calcSum(allMarks);
     
     return allGroupMarks;
 }
 
-console.log(avarageGroupMark);
-
-function sum(item) {
+function calcSum(item) {
     return item.reduce((sum, avar) => sum + avar / item.length , 0)
+}
+
+function showResult(avarageStudentMark,avarageGroupMark) {
+    console.log(avarageStudentMark);
+    console.log(avarageGroupMark);
 }
