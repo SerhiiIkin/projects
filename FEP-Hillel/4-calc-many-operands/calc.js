@@ -11,13 +11,16 @@ function math() {
         4: showConsole,
         5: showConsole
     };
+    const MIN_NUMBER_COUNT = 1;
+    const MAX_NUMBER_COUNT = 5;
     const ACTION_LIST = Object.keys(ACTION);
+
     const mathAction = getAction();
-    const howMuch = getNumberLong();
-    const number = getNumber(howMuch);
+    const count = getNumberLong();
+    const number = getNumber(count);
     const result = calc(mathAction, number);
 
-    showResult(mathAction, number, result, howMuch);
+    showResult(mathAction, number, result, count);
 
     function getAction() {
         let input;
@@ -38,28 +41,28 @@ function math() {
     }
 
     function getNumberLong() {
-        let howMuch;
+        let count;
 
         do {
-            howMuch = prompt(`How many digits, do you want to write? It is possible to enter only numbers from 2 to 5`);
-        } while (!numberLongError(howMuch));
+            count = prompt(`How many digits, do you want to write? It is possible to enter only numbers from 2 to 5`);
+        } while (!numberLongError(count));
 
-        function numberLongError(howMuch) {
-            if (!(howMuch > 1 && howMuch <= 5)) {
+        function numberLongError(count) {
+            if (!(count > MIN_NUMBER_COUNT && count <= MAX_NUMBER_COUNT)) {
                 alert("You can writte numbers only from 2 to 5! ");
             } else {
                 return true;
             }
         }
 
-        return +howMuch;
+        return +count;
     }
 
-    function getNumber(howMuch) {
+    function getNumber(count) {
         let inputNumbers = [];
         let i, j, element;
 
-        for (i = 0, j = 1; i < howMuch; i++, j++) {
+        for (i = 0, j = 1; i < count; i++, j++) {
             do {
 
                 inputNumbers[i] = prompt(`Writte number #${j}`);
@@ -99,8 +102,8 @@ function math() {
         return result;
     }
 
-    function showResult(mathAction, number, result, howMuch) {
-        return ACTION_SHOW[howMuch](number);
+    function showResult(mathAction, number, result, count) {
+        return ACTION_SHOW[count](number);
     }
 
     function showConsole(number) {
