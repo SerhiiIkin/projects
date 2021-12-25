@@ -21,40 +21,34 @@ const students = [
     }
 ]
 
-const id = createId();
-const avarageStudentMark = avarageMark();
-const avarageGroupMark = avarageGroup();
-const result = showResult(avarageStudentMark,avarageGroupMark);
+const id = 10;
 
-function createId() {
-    let id = 10;
-    return id;
-}
-
-function avarageMark() {
+function avarageStudentMark() {
 
     let getIdMas = students.find(item => item.id == id );
-    let avarage = calcSum(getIdMas.marks);
+    let avarage = calcArithmeticMean(getIdMas.marks);
 
-    return avarage;
+    console.log(avarage);
+
+    return  avarage;
 }
 
-function avarageGroup() {
+function averageGroupMark() {
     let allMarks = [];
 
-    for (let key of students) {
-        allMarks.push(calcSum(key.marks));
+    for (let student of students) {
+        allMarks.push(calcArithmeticMean(student.marks));
     }
-    let allGroupMarks = calcSum(allMarks);
+    let allGroupMarks = calcArithmeticMean(allMarks);
     
+    console.log(allGroupMarks);
+
     return allGroupMarks;
 }
 
-function calcSum(item) {
+function calcArithmeticMean(item) {
     return item.reduce((sum, avar) => sum + avar / item.length , 0)
 }
 
-function showResult(avarageStudentMark,avarageGroupMark) {
-    console.log(avarageStudentMark);
-    console.log(avarageGroupMark);
-}
+avarageStudentMark(10);
+averageGroupMark(students);
