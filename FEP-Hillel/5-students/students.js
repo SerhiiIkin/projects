@@ -20,9 +20,9 @@ const students = [
         marks: [10, 9, 8, 9 ]
     }
 ]
-const id = 10;
+let id;
 
-avarageStudentMark(id);
+avarageStudentMark(10);
 averageGroupMark(students);
 
 function avarageStudentMark(id) {
@@ -41,7 +41,7 @@ function averageGroupMark(students) {
     for (let student of students) {
         allMarks.push(calcArithmeticMean(student.marks));
     }
-    
+
     let allGroupMarks = calcArithmeticMean(allMarks);
     
     console.log(allGroupMarks);
