@@ -20,12 +20,14 @@ const students = [
         marks: [10, 9, 8, 9 ]
     }
 ]
-
 const id = 10;
 
-function avarageStudentMark() {
+avarageStudentMark(id);
+averageGroupMark(students);
 
-    let getIdMas = students.find(item => item.id == id );
+function avarageStudentMark(id) {
+
+    let getIdMas = students.find(item => item.id === id );
     let avarage = calcArithmeticMean(getIdMas.marks);
 
     console.log(avarage);
@@ -33,12 +35,13 @@ function avarageStudentMark() {
     return  avarage;
 }
 
-function averageGroupMark() {
+function averageGroupMark(students) {
     let allMarks = [];
 
     for (let student of students) {
         allMarks.push(calcArithmeticMean(student.marks));
     }
+    
     let allGroupMarks = calcArithmeticMean(allMarks);
     
     console.log(allGroupMarks);
@@ -49,6 +52,3 @@ function averageGroupMark() {
 function calcArithmeticMean(item) {
     return item.reduce((sum, avar) => sum + avar / item.length , 0)
 }
-
-avarageStudentMark(10);
-averageGroupMark(students);
