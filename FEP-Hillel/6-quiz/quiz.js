@@ -2,6 +2,7 @@
 const NUMBER = "number";
 const BOOLEAN = "boolean";
 const STRING = "string";
+const RIGHT_ANSWER = 10;
 const allData = [
     {
         questionText: "Сколько будет 2+2?",
@@ -54,7 +55,7 @@ function questions() {
         }
 
         if (data.answerToQuestion === data.answer) {
-            sumAnswer += 10;
+            sumAnswer += RIGHT_ANSWER;
         }
     }
 
