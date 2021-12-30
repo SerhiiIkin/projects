@@ -1,55 +1,59 @@
 "use strick";
-const allQuestions = [
-    "Сколько будет 2+2?",
-    "Солнце встает на востоке?",
-    "Сколько будет 5 / 0?",
-    "Какого цвета небо?",
-    "Главный вопрос жизни, вселенной и всего такого",
-];
 const allData = [
     {
-        question: +prompt(allQuestions[0]),
-        type: Number,
+        questionText: "Сколько будет 2+2?",
+        answerToQuestion: "",
+        type: "number",
+        answer: 4,
     },
     {
-        question: confirm(allQuestions[1]),
-        type: Boolean,
+        questionText: "Солнце встает на востоке?",
+        answerToQuestion: "",
+        type: "boolean",
+        answer: true,
     },
     {
-        question: prompt(allQuestions[2]),
-        type: String,
+        questionText: "Сколько будет 5 / 0?",
+        answerToQuestion: "",
+        type: "string",
+        answer: "0",
     },
     {
-        question: prompt(allQuestions[3]),
-        type: String,
+        questionText: "Какого цвета небо?",
+        answerToQuestion: "",
+        type: "string",
+        answer: "голубого",
     },
     {
-        question: +prompt(allQuestions[4]),
-        type: Number,
+        questionText: "Главный вопрос жизни, вселенной и всего такого",
+        answerToQuestion: "",
+        type: "number",
+        answer: 42,
     },
 ];
-const rightAnswers = [4, true, "0", "голубого", 42];
 let sumAnswer = 0;
 
-result();
+askQuestions();
+alert(`Вы получили ${checkQuestions()} балов!`);
+
+function askQuestions() {
+    for (let i = 0; i < allData.length; i++) {
+        if (allData[i].type === "number") {
+            allData[i].answerToQuestion = +prompt(allData[i].questionText);
+        } else if (allData[i].type === "string") {
+            allData[i].answerToQuestion = prompt(allData[i].questionText);
+        } else if (allData[i].type === "boolean") {
+            allData[i].answerToQuestion = confirm(allData[i].questionText);
+        }
+    }
+}
 
 function checkQuestions() {
     for (let i = 0; i < allData.length; i++) {
-        if (allData[i].question === rightAnswers[i]) {
+        if (allData[i].answerToQuestion === allData[i].answer) {
             sumAnswer += 10;
         }
     }
 
     return sumAnswer;
-}
-
-function result() {
-    let allAnswers = allData.map((item) => item.question);
-
-    for (let i = 0; i < allAnswers.length; i++) {
-        const elem = allAnswers[i];
-        alert(`На вопрос "${allQuestions[i]}" Ваш ответ: ${elem}`);
-    }
-
-    alert(`Вы получили ${checkQuestions()} балов!`);
 }
