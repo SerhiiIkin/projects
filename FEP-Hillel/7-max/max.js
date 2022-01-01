@@ -16,10 +16,12 @@ function max(arr) {
     if (arr.length === 1) {
         let result = arr[0];
         return result;
-    } else if (arr[0] > arr[arr.length - 1]) {
+    }
+    if (arr[0] > arr[arr.length - 1]) {
         arr.pop();
         return max(arr);
-    } else if (arr[0] < arr[arr.length - 1]) {
+    }
+    if (arr[0] < arr[arr.length - 1]) {
         arr.shift();
         return max(arr);
     }
