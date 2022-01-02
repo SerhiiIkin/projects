@@ -35,12 +35,13 @@ const allData = [
         answer: 42,
     },
 ];
-let sumAnswer = 0;
+const mark = questions();
 
-questions();
-result(sumAnswer);
+result(mark);
 
 function questions() {
+    let sumAnswer = 0;
+
     for (let data of allData) {
         switch (data.type) {
             case NUMBER:
@@ -63,13 +64,8 @@ function questions() {
 }
 
 function result(sumAnswer) {
-    const questionText = allData.map((item) => item.questionText);
-    const answers = allData.map((item) => item.answerToQuestion);
-
-    for (let i = 0; i < questionText.length; i++) {
-        const elem = questionText[i];
-        const item = answers[i];
-        alert(`На вопрос "${elem}" Ваш ответ: ${item}`);
+    for (let { questionText, answerToQuestion } of allData) {
+        alert(`На вопрос "${questionText}" Ваш ответ: ${answerToQuestion}`);
     }
 
     alert(`Вы получили ${sumAnswer} балов!`);
