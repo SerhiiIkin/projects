@@ -63,10 +63,10 @@ function questions() {
     return sumAnswer;
 }
 
-function result(sumAnswer) {
+function result() {
     for (let { questionText, answerToQuestion } of allData) {
         alert(`На вопрос "${questionText}" Ваш ответ: ${answerToQuestion}`);
     }
 
-    alert(`Вы получили ${sumAnswer} балов!`);
+    alert(`Вы получили ${mark} балов!`);
 }
