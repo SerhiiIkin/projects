@@ -1,6 +1,4 @@
 function createCalculator(num) {
-    let result = num;
-
     function checkNum(Num) {
         if (!(isNaN(Num) || Num === "")) {
             return +Num;
@@ -10,10 +8,10 @@ function createCalculator(num) {
     }
 
     return {
-        set: (enterNum) => (result = checkNum(enterNum)),
-        get: () => result,
-        sub: (Num) => (result *= checkNum(Num)),
-        add: (Num) => (result += checkNum(Num)),
+        set: (enterNum) => (num = checkNum(enterNum)),
+        get: () => num,
+        sub: (Num) => (num *= checkNum(Num)),
+        add: (Num) => (num += checkNum(Num)),
     };
 }
 
@@ -23,6 +21,6 @@ calculator.sub(2);
 calculator.add("asd");
 calculator.add(2);
 calculator.set(2);
-calculator.add(2);
+calculator.add(6);
 
 console.log(calculator.get());
