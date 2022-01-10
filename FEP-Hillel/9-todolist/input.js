@@ -1,24 +1,24 @@
 const myList = document.querySelector(".list");
-const myInput = document.querySelector(".input");
-const btn = document.querySelector(".btn");
-let nyDiv = document.createElement("div");
+const inputText = document.querySelector(".input");
+const addBtn = document.querySelector(".btn");
+let errorDiv = document.createElement("div");
 
-btn.addEventListener("click", onClickBtn);
+addBtn.addEventListener("click", onClickBtn);
 
 function onClickBtn() {
     let nyLi = document.createElement("li");
-    let value = myInput.value;
+    let value = inputText.value;
 
     if (value !== "") {
         nyLi.textContent = value;
         myList.append(nyLi);
         value = null;
-        nyDiv.classList.remove("red");
-        nyDiv.classList.add("hide", "nyDiv");
+        errorDiv.classList.remove("red");
+        errorDiv.classList.add("hide", "nyDiv");
     } else {
-        nyDiv.innerHTML = "Enter text in input!";
-        nyDiv.classList.add("red", "nyDiv");
-        nyDiv.classList.remove("hide");
-        myInput.after(nyDiv);
+        errorDiv.innerHTML = "Enter text in input!";
+        errorDiv.classList.add("red", "nyDiv");
+        errorDiv.classList.remove("hide");
+        inputText.after(errorDiv);
     }
 }
