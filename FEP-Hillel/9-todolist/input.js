@@ -6,19 +6,33 @@ let errorDiv = document.createElement("div");
 addBtn.addEventListener("click", onClickBtn);
 
 function onClickBtn() {
-    let newLiEl = document.createElement("li");
-    let value = inputEl.value;
-
-    if (value === "") {
-        errorDiv.textContent = "Enter text in input!";
-        errorDiv.classList.add("red", "nyDiv");
-        errorDiv.classList.remove("hide");
-        inputEl.after(errorDiv);
-    } else {
-        newLiEl.textContent = value;
-        listEl.append(newLiEl);
-        value = null;
-        errorDiv.classList.remove("red");
-        errorDiv.classList.add("hide", "nyDiv");
+    if (inputEl.value === "") {
+        showError();
+        return;
     }
+    hideError();
+    addTodo(inputEl.value);
+    clear();
+}
+
+function showError() {
+    errorDiv.textContent = "Enter text in input!";
+    errorDiv.classList.add("red", "nyDiv");
+    errorDiv.classList.remove("hide");
+    inputEl.after(errorDiv);
+}
+
+function hideError() {
+    errorDiv.classList.remove("red", "nyDiv");
+    errorDiv.classList.add("hide");
+}
+
+function addTodo(message) {
+    let newLiEl = document.createElement("li");
+    newLiEl.textContent = message;
+    listEl.append(newLiEl);
+}
+
+function clear() {
+    inputEl.value = null;
 }
