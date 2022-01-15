@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link rel="stylesheet" href="style.css" />
+        <script src="./input.js" defer></script>
+        <title>Document</title>
+    </head>
+
+    <body>
+        <h2>My list</h2>
+
+        <table class="list">
+            <tr class="list__row">
+                <td class="list__name">Name</td>
+                <td class="list__surname">Surname</td>
+                <td class="list__phone">Phone number</td>
+            </tr>
+
+            <tr class="list__row">
+                <td class="list__name">Serhii</td>
+                <td class="list__surname">Ikin</td>
+                <td class="list__phone">50246519</td>
+            </tr>
+        </table>
+        <div class="input__container">
+            <input class="input" type="text" />
+            <input class="input" type="text" />
+            <input class="input" type="number" />
+        </div>
+
+        <button class="btn">Add data to list</button>
+    </body>
+
+    <script class="list__item" type="text/template">
+        <tr class="list__row">
+            <td class="list__name">{{name}}</td>
+            <td class="list__surname">{{surname}}</td>
+            <td class="list__phone">{{phone}}</td>
+        </tr>
+    </script>
+</html>
