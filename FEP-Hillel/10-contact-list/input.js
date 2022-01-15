@@ -1,25 +1,31 @@
 const table = document.querySelector(".list");
 const allInputs = document.querySelectorAll(".input");
 const inputContainer = document.querySelector(".input__container");
-const addBtn = document.querySelector(".btn");
+const btnContainer = document.querySelector(".btn__container");
 let errorDiv = document.createElement("div");
 const listItem = document.querySelector(".list__item");
 
-addBtn.addEventListener("click", onClickBtn);
+btnContainer.addEventListener("click", onClickBtn);
 
-function onClickBtn() {
+function onClickBtn(e) {
     let writtenName = allInputs[0].value;
     let writtenSurName = allInputs[1].value;
     let writtenPhone = allInputs[2].value;
 
-    if (checkInputs(writtenName, writtenSurName, writtenPhone)) {
-        showError();
-        return;
+    if (e.target.classList.contains("btn__add")) {
+        if (checkInputs(writtenName, writtenSurName, writtenPhone)) {
+            showError();
+            return;
+        }
+
+        hideError();
+        addToList(writtenName, writtenSurName, writtenPhone);
+        clear();
     }
 
-    hideError();
-    addToList(writtenName, writtenSurName, writtenPhone);
-    clear();
+    if (e.target.classList.contains("btn__del")) {
+        delFromList(writtenName, writtenSurName, writtenPhone);
+    }
 }
 
 function checkInputs(writtenName, writtenSurName, writtenPhone) {
@@ -35,6 +41,7 @@ function showError() {
     errorDiv.textContent = "Enter text in input!";
     errorDiv.classList.add("red", "nyDiv");
     errorDiv.classList.remove("hide");
+
     inputContainer.insertAdjacentElement("beforeend", errorDiv);
 }
 
@@ -54,4 +61,8 @@ function addToList(name, surname, phone) {
 
 function clear() {
     allInputs.forEach((item) => (item.value = null));
+}
+
+function delFromList(name, surname, phone) {
+    return table.lastChild.remove();
 }
