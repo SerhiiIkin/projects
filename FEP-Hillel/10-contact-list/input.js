@@ -1,40 +1,74 @@
+const CONTACT_LIST = ".list__row";
+const BTN_ADD = "btn__add";
+const BTN_DEL = "btn__del";
+
 const table = document.querySelector(".list");
+const listContact = document.querySelector(".list__contacts");
 const allInputs = document.querySelectorAll(".input");
 const inputContainer = document.querySelector(".input__container");
-const btnContainer = document.querySelector(".btn__container");
+const btnAdd = document.querySelector(".btn__add");
+const btnDel = document.querySelectorAll(".btn__del");
 let errorDiv = document.createElement("div");
-const listItem = document.querySelector(".list__item");
+const listItem = document.querySelector(".list__item").innerHTML;
 
-btnContainer.addEventListener("click", onClickBtn);
+btnAdd.addEventListener("click", onClickAddBtnClick);
+table.addEventListener("click", onTableClick);
+inputContainer.addEventListener("keypress", onInputPress);
 
-function onClickBtn(e) {
-    let writtenName = allInputs[0].value;
-    let writtenSurName = allInputs[1].value;
-    let writtenPhone = allInputs[2].value;
+function onClickAddBtnClick(e) {
+    const contactList = getContactList();
+    checkAndAdd(contactList);
+}
 
-    if (e.target.classList.contains("btn__add")) {
-        if (checkInputs(writtenName, writtenSurName, writtenPhone)) {
-            showError();
-            return;
-        }
-
-        hideError();
-        addToList(writtenName, writtenSurName, writtenPhone);
-        clear();
-    }
-
-    if (e.target.classList.contains("btn__del")) {
-        delFromList(writtenName, writtenSurName, writtenPhone);
+function onTableClick(e) {
+    if (e.target.classList.contains(BTN_DEL)) {
+        const contactItem = getContactListItem(e.target);
+        removeContactRow(contactItem);
     }
 }
 
-function checkInputs(writtenName, writtenSurName, writtenPhone) {
+function onInputPress(e) {
+    const contactList = getContactList();
+    if (e.key === "Enter") {
+        checkAndAdd(contactList);
+    }
+}
+
+function getContactList() {
+    const contact = {};
+
+    allInputs.forEach((input) => {
+        contact[input.name] = input.value;
+    });
+
+    return contact;
+}
+
+function checkAndAdd(contactList) {
+    if (!checkInputs(contactList)) {
+        showError();
+        return;
+    }
+
+    hideError();
+    addToList(contactList);
+    clear();
+}
+
+function checkInputs(contactList) {
     return (
-        writtenName === "" ||
-        writtenSurName === "" ||
-        writtenPhone === "" ||
-        isNaN(writtenPhone)
+        !checkEmpty(contactList.name) &&
+        !checkEmpty(contactList.surname) &&
+        checkPhone(contactList.phone)
     );
+}
+
+function checkEmpty(str) {
+    return str.trim() === "" && typeof str === "string";
+}
+
+function checkPhone(phone) {
+    return !checkEmpty(phone) && !isNaN(phone);
 }
 
 function showError() {
@@ -50,19 +84,26 @@ function hideError() {
     errorDiv.classList.add("hide");
 }
 
-function addToList(name, surname, phone) {
-    const listItemHTML = listItem.innerHTML
-        .replace("{{name}}", name)
-        .replace("{{surname}}", surname)
-        .replace("{{phone}}", phone);
+function addToList(contactList) {
+    let listItemHTML = listItem;
 
-    table.insertAdjacentHTML("beforeend", listItemHTML);
+    for (let key in contactList) {
+        if (Object.hasOwnProperty.call(contactList, key)) {
+            listItemHTML = listItemHTML.replace(`{{${key}}}`, contactList[key]);
+        }
+    }
+
+    listContact.insertAdjacentHTML("beforeend", listItemHTML);
 }
 
 function clear() {
     allInputs.forEach((item) => (item.value = null));
 }
 
-function delFromList(name, surname, phone) {
-    return table.lastChild.remove();
+function getContactListItem(item) {
+    return item.closest(CONTACT_LIST);
+}
+
+function removeContactRow(item) {
+    item.remove();
 }

@@ -12,36 +12,30 @@
     <body>
         <h2>My list</h2>
 
-        <table class="list">
-            <tr class="list__row">
-                <td class="list__name">Name</td>
-                <td class="list__surname">Surname</td>
-                <td class="list__phone">Phone number</td>
-            </tr>
-
-            <tr class="list__row">
-                <td class="list__name">Serhii</td>
-                <td class="list__surname">Ikin</td>
-                <td class="list__phone">50246519</td>
-            </tr>
-        </table>
+        <div class="list">
+            <div class="list__contacts">
+                <div class="list__title">
+                    <div class="list__name">Name</div>
+                    <div class="list__surname">Surname</div>
+                    <div class="list__phone">Phone number</div>
+                </div>
+            </div>
+        </div>
         <div class="input__container">
-            <input class="input" type="text" />
-            <input class="input" type="text" />
-            <input class="input" type="number" />
+            <input class="input input__name" type="text" name="name" />
+            <input class="input input__surname" type="text" name="surname" />
+            <input class="input input__phone" type="text" name="phone" />
         </div>
 
-        <div class="btn__container">
-            <button class="btn btn__add">Add data to list</button>
-            <button class="btn btn__del">Delete from list</button>
-        </div>
+        <button class="btn btn__add">Add data to list</button>
     </body>
 
     <script class="list__item" type="text/template">
-        <tr class="list__row">
-            <td class="list__name">{{name}}</td>
-            <td class="list__surname">{{surname}}</td>
-            <td class="list__phone">{{phone}}</td>
-        </tr>
+        <div class="list__row">
+            <div class="list__name">{{name}}</div>
+            <div class="list__surname">{{surname}}</div>
+            <div class="list__phone">{{phone}}</div>
+            <button class="btn btn__del">Delete</button>
+        </div>
     </script>
 </html>
