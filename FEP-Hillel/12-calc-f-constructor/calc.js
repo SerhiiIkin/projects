@@ -2,27 +2,47 @@ function Calculator(base) {
     this.base = base;
 
     this.add = function (num) {
-        this.base += this.checkNum(num);
+        if (this.isNotNum(num)) {
+            return this.base;
+        }
+
+        this.base += num;
     };
 
     this.sub = function (num) {
-        this.base *= this.checkNum(num);
+        if (this.isNotNum(num)) {
+            return this.base;
+        }
+
+        this.base *= num;
+    };
+
+    this.div = function (num) {
+        if (this.isNotNum(num)) {
+            return this.base;
+        }
+
+        this.base /= num;
     };
 
     this.set = function (enterNum) {
-        this.base = this.checkNum(enterNum);
+        this.base = this.getNum(enterNum);
     };
 
     this.get = function () {
-        return this.checkNum(this.base);
+        return this.getNum(this.base);
     };
 
-    this.checkNum = function (num) {
-        if (!(isNaN(num) || num === "")) {
-            return +num;
+    this.getNum = function (num) {
+        if (this.isNotNum(num)) {
+            return this.base;
         }
 
-        return 0;
+        return +num;
+    };
+
+    this.isNotNum = function (num) {
+        return num === 0 || num === "" || isNaN(num);
     };
 }
 
@@ -33,5 +53,7 @@ calc.add(10);
 calc.sub(20);
 calc.set(20);
 calc.add(10);
+calc.div("sdf");
 calc.add("asd");
+calc.set("sad");
 calc.get();
