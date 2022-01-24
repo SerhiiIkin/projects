@@ -2,27 +2,15 @@ function Calculator(base) {
     this.base = base;
 
     this.add = function (num) {
-        if (this.isNotNum(num)) {
-            return this.base;
-        }
-
-        this.base += num;
+        this.isNotNum(num) ? this.base : (this.base += num);
     };
 
     this.sub = function (num) {
-        if (this.isNotNum(num)) {
-            return this.base;
-        }
-
-        this.base *= num;
+        this.isNotNum(num) ? this.base : (this.base *= num);
     };
 
     this.div = function (num) {
-        if (this.isNotNum(num)) {
-            return this.base;
-        }
-
-        this.base /= num;
+        this.isNotNum(num) ? this.base : (this.base /= num);
     };
 
     this.set = function (enterNum) {
@@ -30,15 +18,11 @@ function Calculator(base) {
     };
 
     this.get = function () {
-        return this.getNum(this.base);
+        return this.base;
     };
 
     this.getNum = function (num) {
-        if (this.isNotNum(num)) {
-            return this.base;
-        }
-
-        return +num;
+        return this.isNotNum(num) ? this.base : +num;
     };
 
     this.isNotNum = function (num) {
@@ -51,9 +35,10 @@ const calc = new Calculator(100);
 calc.add(10);
 calc.add(10);
 calc.sub(20);
+calc.div(10);
 calc.set(20);
 calc.add(10);
 calc.div("sdf");
 calc.add("asd");
 calc.set("sad");
-calc.get();
+console.log(calc.get());
