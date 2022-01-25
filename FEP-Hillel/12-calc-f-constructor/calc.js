@@ -2,15 +2,21 @@ function Calculator(base) {
     this.base = base;
 
     this.add = function (num) {
-        this.isNotNum(num) ? this.base : (this.base += num);
+        if (this.isNotNum(num)) {
+            this.base += num;
+        }
     };
 
     this.sub = function (num) {
-        this.isNotNum(num) ? this.base : (this.base *= num);
+        if (this.isNotNum(num)) {
+            this.base *= num;
+        }
     };
 
     this.div = function (num) {
-        this.isNotNum(num) ? this.base : (this.base /= num);
+        if (this.isNotNum(num)) {
+            this.base /= num;
+        }
     };
 
     this.set = function (enterNum) {
@@ -22,11 +28,11 @@ function Calculator(base) {
     };
 
     this.getNum = function (num) {
-        return this.isNotNum(num) ? this.base : +num;
+        return this.isNotNum(num) ? +num : this.base;
     };
 
     this.isNotNum = function (num) {
-        return num === 0 || num === "" || isNaN(num);
+        return !(num === 0 || num === "" || isNaN(num));
     };
 }
 
