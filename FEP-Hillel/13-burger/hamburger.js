@@ -1,6 +1,6 @@
 function Hamburger(size) {
-    this.prise = Object.values(size)[0];
-    this.calories = Object.values(size)[1];
+    this.prise = size.price;
+    this.calories = size.calories;
 }
 
 Hamburger.TOPPING_CHEESE = {
