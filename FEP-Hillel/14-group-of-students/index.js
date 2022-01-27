@@ -10,8 +10,8 @@ group.addStudent = new Student("Bob", [6, 10]);
 console.log(group.students.length === 3);
 group.addStudent = {};
 console.log(group.students.length === 3);
+
 console.log(group.averageMark);
 
-console.log(group.students);
 group.students = new Student("John", [10, 10, 5, 10]);
 console.log(group.students.length === 3);
