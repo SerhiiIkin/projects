@@ -13,5 +13,11 @@ console.log(group.students.length === 3);
 
 console.log(group.averageMark);
 
-group.students = new Student("John", [10, 10, 5, 10]);
+// group.students = new Student("John", [10, 10, 5, 10]);
 console.log(group.students.length === 3);
+
+Array.prototype.max = function () {
+    return this.sort((a, b) => a - b)[this.length - 1];
+};
+
+console.log([6, 5, 8, 7].max());
