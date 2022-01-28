@@ -1,5 +1,6 @@
 import Group from "./group.js";
 import Student from "./student.js";
+import Max from "./max.js";
 
 const group = new Group();
 
@@ -17,7 +18,7 @@ console.log(group.averageMark);
 console.log(group.students.length === 3);
 
 Array.prototype.max = function () {
-    return this.sort((a, b) => a - b)[this.length - 1];
+    return new Max(this).max();
 };
 
-console.log([6, 5, 8, 7].max());
+console.log([6, 5, 8, 7, 35, 10, 24].max());
