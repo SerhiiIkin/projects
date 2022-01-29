@@ -1,12 +1,8 @@
 import Student from "./student.js";
-
-class Group extends Student {
+class Group {
     groupStudents = [];
-    constructor(name, marks) {
-        super(name, marks);
-    }
 
-    set addStudent(student) {
+    addStudent(student) {
         if (this.#isStudent(student)) {
             this.groupStudents.push(student);
         }
