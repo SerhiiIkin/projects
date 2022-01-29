@@ -25,7 +25,8 @@ class Group {
 
         return allStudentsMarks
             .flat()
-            .reduce((a, b) => a + b / allStudentsMarks.length / 2, 0);
+            .reduce((a, b) => a + b / allStudentsMarks.length / 2, 0)
+            .toFixed(2);
     }
 }
 
