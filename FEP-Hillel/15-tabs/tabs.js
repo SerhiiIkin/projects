@@ -4,7 +4,7 @@ class Tabs {
     static CLASS_BUTTON = "tabs__button";
     static CLASS_OPEN = "open";
     static CLASS_ITEMS = "tabs__item";
-    static CLASS_TABS = ".tabs";
+    static CLASS_TABS = "#tabs";
 
     constructor(tabs) {
         this.#tabs = tabs;
