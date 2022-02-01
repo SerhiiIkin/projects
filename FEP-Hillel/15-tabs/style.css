@@ -1,0 +1,23 @@
+.tabs {
+    border: 1px solid black;
+    max-width: 600px;
+}
+
+.tabs__container {
+    padding: 10px;
+    display: flex;
+
+    border-bottom: 1px solid black;
+}
+
+.tabs__button {
+    margin-right: 10px;
+}
+
+.tabs__item {
+    display: none;
+}
+
+.open {
+    display: block;
+}
