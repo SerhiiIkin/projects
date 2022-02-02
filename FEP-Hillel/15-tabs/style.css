@@ -21,3 +21,7 @@
 .open {
     display: block;
 }
+
+.changeBg {
+    background: red;
+}

@@ -4,7 +4,7 @@ class Tabs {
     static CLASS_BUTTON = "tabs__button";
     static CLASS_OPEN = "open";
     static CLASS_ITEMS = "tabs__item";
-    static CLASS_TABS = "#tabs";
+    static CLASS_CHANGE = "changeBg";
 
     constructor(tabs) {
         this.#tabs = tabs;
@@ -38,47 +38,57 @@ class Tabs {
         const firstTab = contentContainer.querySelector(
             "." + Tabs.CLASS_ITEMS + "-1"
         );
+        const firstBtn = buttons[0];
 
-        this.toggleClassOpen(firstTab);
+        this.toggleClass(firstTab, Tabs.CLASS_OPEN);
+        this.toggleClass(firstBtn, Tabs.CLASS_CHANGE);
     }
 
     onTabsClick(e) {
         const buttonOne = this.containsClassButton(e.target, 1);
         const buttonTwo = this.containsClassButton(e.target, 2);
         const buttonTree = this.containsClassButton(e.target, 3);
-        const allTabsContent = e.target
-            .closest(Tabs.CLASS_TABS)
-            .querySelectorAll("." + Tabs.CLASS_ITEMS);
+        const allTabsContent = this.#tabs.querySelectorAll(
+            "." + Tabs.CLASS_ITEMS
+        );
+        const allBtn = this.#tabs.querySelectorAll("." + Tabs.CLASS_BUTTON);
 
         if (buttonOne) {
-            this.removeClassOpen(allTabsContent);
-
-            this.toggleClassOpen(allTabsContent[0]);
+            this.removeClass(allTabsContent, allBtn);
+            this.toggleClass(allTabsContent[0], Tabs.CLASS_OPEN);
+            this.toggleClass(allBtn[0], Tabs.CLASS_CHANGE);
         }
 
         if (buttonTwo) {
-            this.removeClassOpen(allTabsContent);
-
-            this.toggleClassOpen(allTabsContent[1]);
+            this.removeClass(allTabsContent, allBtn);
+            this.toggleClass(allTabsContent[1], Tabs.CLASS_OPEN);
+            this.toggleClass(allBtn[1], Tabs.CLASS_CHANGE);
         }
 
         if (buttonTree) {
-            this.removeClassOpen(allTabsContent);
-
-            this.toggleClassOpen(allTabsContent[2]);
+            this.removeClass(allTabsContent, allBtn);
+            this.toggleClass(allTabsContent[2], Tabs.CLASS_OPEN);
+            this.toggleClass(allBtn[2], Tabs.CLASS_CHANGE);
         }
     }
 
-    removeClassOpen(allTabs) {
-        allTabs.forEach((tab) => {
-            if (tab.classList.contains(Tabs.CLASS_OPEN)) {
-                this.toggleClassOpen(tab);
+    removeClass(allTabs, allBtn) {
+        for (let i = 0; i < allBtn.length; i++) {
+            const btn = allBtn[i];
+            const tab = allTabs[i];
+
+            if (btn.classList.contains(Tabs.CLASS_CHANGE)) {
+                this.toggleClass(btn, Tabs.CLASS_CHANGE);
             }
-        });
+            
+            if (tab.classList.contains(Tabs.CLASS_OPEN)) {
+                this.toggleClass(tab, Tabs.CLASS_OPEN);
+            }
+        }
     }
 
-    toggleClassOpen(el) {
-        el.classList.toggle(Tabs.CLASS_OPEN);
+    toggleClass(el, elClass) {
+        el.classList.toggle(elClass);
     }
 
     containsClassButton(target, num) {
