@@ -8,13 +8,15 @@ btn.addEventListener("click", onBtnClick);
 
 function onBtnClick() {
     const inputValue = document.querySelector(".input").value;
-    User.getUser(inputValue).then((user) => {
-        if (user.name === null || user.name === undefined) {
-            notFound(inputValue);
-        } else {
-            showInfo(user);
-        }
-    });
+    User.getUser(inputValue)
+        .then((user) => {
+            if (user.name === null || user.name === undefined) {
+                notFound(inputValue);
+            } else {
+                showInfo(user);
+            }
+        })
+        .catch((e) => console.log(e));
 }
 
 function notFound(inputValue) {
