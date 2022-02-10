@@ -7,57 +7,45 @@ btn.addEventListener("click", onBtnClick);
 
 function onBtnClick() {
     const inputValue = document.querySelector(".input").value;
-    User.getUser(inputValue)
-        .then((user) => {
-            if (user.name === null || user.name === undefined) {
-                notFound(user);
-            } else {
-                infoAbout(user);
-                showAvatar(user);
-                showNumbersRepositories(user);
-                showFollowers(user);
-                showFollowing(user);
-            }
-        })
-        .catch((e) => console.log(e));
+    User.getUser(inputValue).then((user) => {
+        if (user.name === null || user.name === undefined) {
+            notFound(inputValue);
+        } else {
+            infoAbout(user);
+            showAvatar(user);
+            showNumbersRepositories(user);
+            showFollowers(user);
+            showFollowing(user);
+        }
+    });
 }
 
-function notFound(user) {
-    let div = createDiv();
-    div.textContent = `User with login ${user.login}, not found`;
-    userTable.insertAdjacentElement("beforeend", div);
+function notFound(inputValue) {
+    let htmlNotFound = `<div> User with login ${inputValue}, not found </div>`;
+    userTable.insertAdjacentHTML("beforeend", htmlNotFound);
 }
 
 function infoAbout(user) {
-    let div = createDiv();
-    div.textContent = `Information about ${user.name}`;
-    userTable.insertAdjacentElement("beforeend", div);
+    let htmlInfoAbout = `<div>Information about ${user.name}</div>`;
+    userTable.insertAdjacentHTML("beforeend", htmlInfoAbout);
 }
 
 function showAvatar(user) {
-    let img = document.createElement("img");
-    img.src = user.avatar_url;
-    userTable.insertAdjacentElement("beforeend", img);
+    let HtmlShowAvatar = `<div><img src="${user.avatar_url}"></div>`;
+    userTable.insertAdjacentHTML("beforeend", HtmlShowAvatar);
 }
 
 function showNumbersRepositories(user) {
-    let div = createDiv();
-    div.textContent = `${user.name}s repositories :${user.public_repos}`;
-    userTable.insertAdjacentElement("beforeend", div);
+    let HtmlShowNumbersRepositories = `<div>${user.name}s repositories :${user.public_repos}</div>`;
+    userTable.insertAdjacentHTML("beforeend", HtmlShowNumbersRepositories);
 }
 
 function showFollowers(user) {
-    let div = createDiv();
-    div.textContent = `${user.name}s followers :${user.followers}`;
-    userTable.insertAdjacentElement("beforeend", div);
+    let htmlShowFollowers = `<div>${user.name}s followers :${user.followers}</div>`;
+    userTable.insertAdjacentHTML("beforeend", htmlShowFollowers);
 }
 
 function showFollowing(user) {
-    let div = createDiv();
-    div.textContent = `${user.name}s following :${user.following}`;
-    userTable.insertAdjacentElement("beforeend", div);
-}
-
-function createDiv() {
-    return document.createElement("div");
+    let htmlShowFollowing = `<div>${user.name}s following :${user.following}</div>`;
+    userTable.insertAdjacentHTML("beforeend", htmlShowFollowing);
 }
