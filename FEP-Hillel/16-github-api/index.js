@@ -2,6 +2,7 @@ import User from "./User.js";
 
 const btn = document.querySelector(".btn");
 const userTable = document.querySelector(".user");
+const htmlContent = document.querySelector("#content").innerHTML;
 
 btn.addEventListener("click", onBtnClick);
 
@@ -11,11 +12,7 @@ function onBtnClick() {
         if (user.name === null || user.name === undefined) {
             notFound(inputValue);
         } else {
-            infoAbout(user);
-            showAvatar(user);
-            showNumbersRepositories(user);
-            showFollowers(user);
-            showFollowing(user);
+            showInfo(user);
         }
     });
 }
@@ -25,27 +22,17 @@ function notFound(inputValue) {
     userTable.insertAdjacentHTML("beforeend", htmlNotFound);
 }
 
-function infoAbout(user) {
-    let htmlInfoAbout = `<div>Information about ${user.name}</div>`;
+function showInfo(user) {
+    let htmlInfoAbout = htmlContent;
+    htmlInfoAbout = htmlInfoAbout
+        .replace("${{user.avatar_url}}", user.avatar_url)
+        .replace("${{public_repos}}", user.public_repos)
+        .replace("${{followers}}", user.followers)
+        .replace("${{following}}", user.following)
+        .replace("${{name}}", user.name)
+        .replace("${{name}}", user.name)
+        .replace("${{name}}", user.name)
+        .replace("${{name}}", user.name);
+
     userTable.insertAdjacentHTML("beforeend", htmlInfoAbout);
-}
-
-function showAvatar(user) {
-    let HtmlShowAvatar = `<div><img src="${user.avatar_url}"></div>`;
-    userTable.insertAdjacentHTML("beforeend", HtmlShowAvatar);
-}
-
-function showNumbersRepositories(user) {
-    let HtmlShowNumbersRepositories = `<div>${user.name}s repositories :${user.public_repos}</div>`;
-    userTable.insertAdjacentHTML("beforeend", HtmlShowNumbersRepositories);
-}
-
-function showFollowers(user) {
-    let htmlShowFollowers = `<div>${user.name}s followers :${user.followers}</div>`;
-    userTable.insertAdjacentHTML("beforeend", htmlShowFollowers);
-}
-
-function showFollowing(user) {
-    let htmlShowFollowing = `<div>${user.name}s following :${user.following}</div>`;
-    userTable.insertAdjacentHTML("beforeend", htmlShowFollowing);
 }
