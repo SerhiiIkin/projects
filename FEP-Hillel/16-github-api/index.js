@@ -25,14 +25,14 @@ function notFound(inputValue) {
 function showInfo(user) {
     let htmlInfoAbout = htmlContent;
     htmlInfoAbout = htmlInfoAbout
-        .replace("${{user.avatar_url}}", user.avatar_url)
-        .replace("${{public_repos}}", user.public_repos)
-        .replace("${{followers}}", user.followers)
-        .replace("${{following}}", user.following)
-        .replace("${{name}}", user.name)
-        .replace("${{name}}", user.name)
-        .replace("${{name}}", user.name)
-        .replace("${{name}}", user.name);
+        .replace("{{user.avatar_url}}", user.avatar_url)
+        .replace("{{public_repos}}", user.public_repos)
+        .replace("{{followers}}", user.followers)
+        .replace("{{following}}", user.following)
+        .replace(`{{name}}`, user.name)
+        .replace(`{{name}}`, user.name)
+        .replace(`{{name}}`, user.name)
+        .replace(`{{name}}`, user.name);
 
     userTable.insertAdjacentHTML("beforeend", htmlInfoAbout);
 }
