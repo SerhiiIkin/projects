@@ -6,7 +6,9 @@ const htmlContent = document.querySelector("#content").innerHTML;
 
 btn.addEventListener("click", onBtnClick);
 
-function onBtnClick() {
+function onBtnClick(e) {
+    e.preventDefault();
+
     const inputValue = document.querySelector(".input").value;
     User.getUser(inputValue)
         .then((user) => {
