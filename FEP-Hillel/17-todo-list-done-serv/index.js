@@ -47,7 +47,7 @@ function onFormClick(e) {
         showError();
         return;
     }
-    
+
     hideError();
     addTodo();
     clear();
@@ -75,7 +75,7 @@ function addTodo() {
         title: inputEl.value,
     };
 
-    TodoApi.create(newRow).catch(handleError);
+    TodoApi.createRow(newRow).catch(handleError);
 }
 
 function clear() {
@@ -97,7 +97,7 @@ function onListElClick(e) {
 function deleteRow(el) {
     const id = getId(el);
 
-    TodoApi.delete(id).catch(handleError);
+    TodoApi.deleteRow(id).catch(handleError);
 
     el.remove();
 }
@@ -107,7 +107,7 @@ function changeTextStatus(el) {
     const status = textEl.dataset.status !== "true";
     const id = getId(el);
 
-    TodoApi.update(id, { status });
+    TodoApi.updateRow(id, { status });
 
     textEl.dataset.status = status;
     textEl.classList.toggle(CHANGE_BG_EL);

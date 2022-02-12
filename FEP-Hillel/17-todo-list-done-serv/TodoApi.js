@@ -25,7 +25,7 @@ class TodoApi {
         });
     }
 
-    static create(todo) {
+    static createRow(todo) {
         return fetch(this.URL, {
             method: "POST",
             body: JSON.stringify(todo),
@@ -41,7 +41,7 @@ class TodoApi {
         });
     }
 
-    static update(id, todo) {
+    static updateRow(id, todo) {
         return fetch(this.URL + id, {
             method: "PUT",
             body: JSON.stringify(todo),
@@ -57,7 +57,7 @@ class TodoApi {
         });
     }
 
-    static delete(id) {
+    static deleteRow(id) {
         return fetch(this.URL + id, {
             method: "DELETE",
         }).then((res) => {
