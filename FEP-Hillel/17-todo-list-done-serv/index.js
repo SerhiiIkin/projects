@@ -75,7 +75,11 @@ function addTodo() {
         title: inputEl.value,
     };
 
-    TodoApi.createRow(newRow).catch(handleError);
+    TodoApi.createRow(newRow).then(reload).catch(handleError);
+}
+
+function reload() {
+    location.reload();
 }
 
 function clear() {
