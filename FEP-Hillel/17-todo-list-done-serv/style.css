@@ -1,0 +1,43 @@
+body {
+    padding: 50px;
+}
+
+.btn {
+    display: block;
+    margin-top: 20px;
+}
+
+.red {
+    color: red;
+}
+
+.hide {
+    display: none;
+}
+
+.input-container {
+    position: relative;
+}
+
+.nyDiv {
+    position: absolute;
+    bottom: -20px;
+    left: 1%;
+}
+
+.color {
+    background: green;
+}
+
+.list__text,
+.btn__del {
+    cursor: pointer;
+}
+
+.list__text {
+    padding-right: 20px;
+}
+
+.list__row {
+    padding-bottom: 20px;
+}

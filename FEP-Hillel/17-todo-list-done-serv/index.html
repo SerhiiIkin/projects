@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link rel="stylesheet" href="style.css" />
+        <script type="module" src="./index.js" async></script>
+        <title>Document</title>
+    </head>
+
+    <body>
+        <h2>My list</h2>
+        <ul class="list"></ul>
+        <form class="form">
+            <div class="input-container">
+                <input class="input" type="text" />
+            </div>
+
+            <button type="submit" class="btn">Add text to list</button>
+        </form>
+
+        <script class="content" type="text/temp">
+            <li class= "list__row">
+                <span data-id="{{id}}" data-status="{{status}}" class = "list__text {{trueStatus}}">{{title}}</span>
+                <button class="btn__del" type="button"> delete</button>
+            </li>
+        </script>
+    </body>
+</html>
