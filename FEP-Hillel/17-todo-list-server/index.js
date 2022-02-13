@@ -13,7 +13,7 @@ const content = document.querySelector(".content").innerHTML;
 
 showList();
 
-form.addEventListener("submit", onFormClick);
+form.addEventListener("submit", onFormSubmit);
 listEl.addEventListener("click", onListElClick);
 
 function showList() {
@@ -40,7 +40,7 @@ function todoHtmlList(todoList) {
         .replace("{{trueStatus}}", trueStatus);
 }
 
-function onFormClick(e) {
+function onFormSubmit(e) {
     e.preventDefault();
 
     if (inputEl.value === "") {
@@ -90,23 +90,23 @@ function onListElClick(e) {
     const row = e.target.closest(LIST_ROW);
 
     if (e.target.classList.contains(BTN_DEL)) {
-        deleteRow(row);
+        deleteTodo(row);
     }
 
     if (e.target.classList.contains(LIST_TEXT)) {
-        changeTextStatus(row);
+        changeTodoStatus(row);
     }
 }
 
-function deleteRow(el) {
+function deleteTodo(el) {
     const id = getId(el);
 
-    TodoApi.deleteRow(id).catch(handleError);
+    TodoApi.deleteTodo(id).catch(handleError);
 
     el.remove();
 }
 
-function changeTextStatus(el) {
+function changeTodoStatus(el) {
     const textEl = el.querySelector("." + LIST_TEXT);
     const status = textEl.dataset.status !== "true";
     const id = getId(el);

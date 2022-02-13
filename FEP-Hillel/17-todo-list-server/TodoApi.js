@@ -57,7 +57,7 @@ class TodoApi {
         });
     }
 
-    static deleteRow(id) {
+    static deleteTodo(id) {
         return fetch(this.URL + id, {
             method: "DELETE",
         }).then((res) => {
