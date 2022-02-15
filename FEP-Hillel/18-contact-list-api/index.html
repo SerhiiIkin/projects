@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link rel="stylesheet" href="style.css" />
+        <script src="./index.js" type="module" async></script>
+        <title>Document</title>
+    </head>
+
+    <body>
+        <h2>My list</h2>
+
+        <div class="list">
+            <div class="list__contacts">
+                <div class="list__title">
+                    <div class="list__name">firstName</div>
+                    <div class="list__surname">lastName</div>
+                    <div class="list__phone">Phone number</div>
+                </div>
+            </div>
+        </div>
+
+        <form id="form">
+            <div class="input__container">
+                <input class="input input__name" type="text" name="firstName" />
+                <input
+                    class="input input__surname"
+                    type="text"
+                    name="lastName"
+                />
+                <input class="input input__phone" type="text" name="phone" />
+            </div>
+            <button type="submit" class="btn btn__add">Send</button>
+        </form>
+    </body>
+
+    <script class="list__item" type="text/template">
+        <div data-id="{{id}}" class="list__row">
+            <div class="list__name">{{firstName}}</div>
+            <div class="list__surname">{{lastName}}</div>
+            <div class="list__phone">{{phone}}</div>
+            <button class="btn btn__edit">Edit</button>
+            <button  class="btn btn__del">Delete</button>
+        </div>
+    </script>
+</html>

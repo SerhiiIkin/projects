@@ -1,0 +1,52 @@
+body {
+    padding: 50px;
+}
+
+.btn {
+    margin-right: 10px;
+    margin-left: 20px;
+}
+
+.btn__add {
+    margin-top: 30px;
+}
+
+.red {
+    color: red;
+}
+
+.hide {
+    display: none;
+}
+
+.list__row {
+    display: flex;
+    padding-bottom: 10px;
+    text-align: center;
+    padding-right: 10px;
+}
+
+.list__name {
+    padding-right: 50px;
+}
+
+.list__surname {
+    padding-right: 20px;
+}
+
+.list__title {
+    display: flex;
+    padding-bottom: 10px;
+}
+.input__container {
+    position: relative;
+}
+
+.input__container input {
+    width: 170px;
+}
+
+.nyDiv {
+    position: absolute;
+    top: 25px;
+}
