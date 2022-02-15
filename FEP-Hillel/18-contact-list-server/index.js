@@ -48,29 +48,14 @@ function contactListHtml(contactList) {
         .replace("{{id}}", contactList.id);
 }
 
-function handleError(e) {
-    console.log(e.message);
-}
-
 function onSubmitForm(e) {
     e.preventDefault();
 
     checkContactList();
 }
 
-function getContactList() {
-    const contact = {};
-
-    allInputs.forEach((input) => {
-        contact[input.name] = input.value;
-    });
-
-    return contact;
-}
-
 function checkContactList() {
     const contactList = getContactList();
-    let newContactList = getNewContact(contactList);
 
     if (!checkInputs(contactList)) {
         showError();
@@ -78,13 +63,30 @@ function checkContactList() {
     }
 
     hideError();
-    if (newContactList.id) {
-        updateContact(newContactList);
+
+    if (contactList.id) {
+        updateContact(contactList);
     } else {
         addContact(contactList);
     }
 
     clear();
+}
+
+function getContactList() {
+    const contact = {};
+    const serverContact = getContactById(contactId);
+
+    allInputs.forEach((input) => {
+        contact[input.name] = input.value;
+    });
+
+    return {
+        ...serverContact,
+        firstName: contact.firstName,
+        lastName: contact.lastName,
+        phone: contact.phone,
+    };
 }
 
 function checkInputs(contactList) {
@@ -93,6 +95,14 @@ function checkInputs(contactList) {
         !checkEmpty(contactList.lastName) &&
         checkPhone(contactList.phone)
     );
+}
+
+function checkEmpty(str) {
+    return str.trim() === "" && typeof str === "string";
+}
+
+function checkPhone(phone) {
+    return !checkEmpty(phone) && !isNaN(phone);
 }
 
 function showError() {
@@ -108,16 +118,37 @@ function hideError() {
     errorDiv.classList.add("hide");
 }
 
-function updateContact(newContactList) {
-    ContactApi.updateContact(newContactList.id, newContactList)
+function updateContact(contactList) {
+    ContactApi.updateContact(contactList.id, contactList)
         .then(editHtmlContact)
         .catch(handleError);
+}
+
+function editHtmlContact(contactList) {
+    let listItemHTML = contactListHtml(contactList);
+    let listRow = document.querySelectorAll(CONTACT_LIST);
+
+    listRow.forEach((listEl) => {
+        if (listEl.dataset.id === contactList.id) {
+            let previousElement = listEl.previousElementSibling;
+            listEl.remove();
+            previousElement.insertAdjacentHTML("afterend", listItemHTML);
+        }
+    });
+
+    btnSend.textContent = "Send";
 }
 
 function addContact(contactList) {
     ContactApi.createContact(contactList)
         .then(addHtmlContact)
         .catch(handleError);
+}
+
+function addHtmlContact(contactList) {
+    let listItemHTML = contactListHtml(contactList);
+
+    listContact.insertAdjacentHTML("beforeend", listItemHTML);
 }
 
 function clear() {
@@ -157,57 +188,22 @@ function editContactList(contactItem) {
     contactId = id;
 
     for (let i = 0; i < allInputs.length; i++) {
-        let el = allInputs[i];
-        let item = contactValue[i];
-        el.value = item;
+        let inputEl = allInputs[i];
+        let oneContactValue = contactValue[i];
+        inputEl.value = oneContactValue;
     }
 
     btnSend.textContent = "Save and Send";
 }
 
-function checkEmpty(str) {
-    return str.trim() === "" && typeof str === "string";
-}
-
-function checkPhone(phone) {
-    return !checkEmpty(phone) && !isNaN(phone);
-}
-
-function addHtmlContact(contactList) {
-    let listItemHTML = contactListHtml(contactList);
-
-    listContact.insertAdjacentHTML("beforeend", listItemHTML);
-}
-
-function editHtmlContact(contactList) {
-    let listItemHTML = contactListHtml(contactList);
-    let listRow = document.querySelectorAll(CONTACT_LIST);
-
-    listRow.forEach((listEl) => {
-        if (listEl.dataset.id === contactList.id) {
-            let previousElement = listEl.previousElementSibling;
-            listEl.remove();
-            previousElement.insertAdjacentHTML("afterend", listItemHTML);
-        }
-    });
-
-    btnSend.textContent = "Send";
-}
-
-function getNewContact(contactList) {
-    const contact = getContactById(contactId);
-    return {
-        ...contact,
-        firstName: contactList.firstName,
-        lastName: contactList.lastName,
-        phone: contactList.phone,
-    };
+function getContactById(id) {
+    return serverContactList.find((contact) => contact.id === id);
 }
 
 function getId(item) {
     return item.dataset.id;
 }
 
-function getContactById(id) {
-    return serverContactList.find((contact) => contact.id === id);
+function handleError(e) {
+    console.log(e.message);
 }
