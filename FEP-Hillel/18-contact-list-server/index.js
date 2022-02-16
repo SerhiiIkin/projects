@@ -115,14 +115,13 @@ function hideError() {
 }
 
 function updateContact(contact) {
-    ContactApi.updateContact(contact.id, contact)
-        .then(editHtmlContact)
-        .catch(handleError);
+    ContactApi.updateContact(contact.id, contact).catch(handleError);
+    editHtmlContact(contact);
 }
 
 function editHtmlContact(contact) {
     let listItemHTML = contactHtml(contact);
-    let listRow = document.querySelectorAll(CONTACT_LIST);
+    let listRow = getListRow();
 
     listRow.forEach((listEl) => {
         if (listEl.dataset.id === contact.id) {
@@ -134,10 +133,15 @@ function editHtmlContact(contact) {
 }
 
 function addContact(contact) {
+    addHtmlContact(contact);
+
     ContactApi.createContact(contact)
         .then((contact) => {
-            addHtmlContact(contact);
             serverContactList.push(contact);
+        })
+        .then(() => {
+            let listRow = getListRow();
+            listRow[listRow.length - 1].dataset.id = listRow.length;
         })
         .catch(handleError);
 }
@@ -173,7 +177,9 @@ function getContactListItem(item) {
 function removeContactList(item) {
     const id = getElId(item);
 
-    ContactApi.deleteContact(id).catch(handleError);
+    ContactApi.deleteContact(id)
+        .then(serverContactList.pop())
+        .catch(handleError);
 
     item.remove();
 }
@@ -203,4 +209,8 @@ function getElId(item) {
 
 function handleError(e) {
     console.log(e.message);
+}
+
+function getListRow() {
+    return document.querySelectorAll(CONTACT_LIST);
 }
