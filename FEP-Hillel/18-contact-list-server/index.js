@@ -23,57 +23,53 @@ table.addEventListener("click", onTableClick);
 
 function showList() {
     ContactApi.contactList()
-        .then((contactList) => {
-            getServerContactList(contactList);
-            getContactListHtml(contactList);
+        .then((contact) => {
+            setServerContactList(contact);
+            showContactListHtml(contact);
         })
         .catch(handleError);
 }
 
-function getServerContactList(contactList) {
-    serverContactList = contactList;
+function setServerContactList(contact) {
+    serverContactList = contact;
 }
 
-function getContactListHtml(contactList) {
-    const html = contactList.map(contactListHtml).join("");
+function showContactListHtml(contact) {
+    const html = contact.map(contactHtml).join("");
 
     listContact.insertAdjacentHTML("beforeend", html);
 }
 
-function contactListHtml(contactList) {
+function contactHtml(contact) {
     return listItem
-        .replace("{{firstName}}", contactList.firstName)
-        .replace("{{lastName}}", contactList.lastName)
-        .replace("{{phone}}", contactList.phone)
-        .replace("{{id}}", contactList.id);
+        .replace("{{firstName}}", contact.firstName)
+        .replace("{{lastName}}", contact.lastName)
+        .replace("{{phone}}", contact.phone)
+        .replace("{{id}}", contact.id);
 }
 
 function onSubmitForm(e) {
     e.preventDefault();
 
-    checkContactList();
-}
+    const contact = getContact();
 
-function checkContactList() {
-    const contactList = getContactList();
-
-    if (!checkInputs(contactList)) {
+    if (!checkContact(contact)) {
         showError();
         return;
     }
 
     hideError();
 
-    if (contactList.id) {
-        updateContact(contactList);
+    if (contact.id) {
+        updateContact(contact);
     } else {
-        addContact(contactList);
+        addContact(contact);
     }
 
     clear();
 }
 
-function getContactList() {
+function getContact() {
     const contact = {};
     const serverContact = getContactById(contactId);
 
@@ -89,11 +85,11 @@ function getContactList() {
     };
 }
 
-function checkInputs(contactList) {
+function checkContact(contact) {
     return (
-        !checkEmpty(contactList.firstName) &&
-        !checkEmpty(contactList.lastName) &&
-        checkPhone(contactList.phone)
+        !checkEmpty(contact.firstName) &&
+        !checkEmpty(contact.lastName) &&
+        checkPhone(contact.phone)
     );
 }
 
@@ -118,18 +114,18 @@ function hideError() {
     errorDiv.classList.add("hide");
 }
 
-function updateContact(contactList) {
-    ContactApi.updateContact(contactList.id, contactList)
+function updateContact(contact) {
+    ContactApi.updateContact(contact.id, contact)
         .then(editHtmlContact)
         .catch(handleError);
 }
 
-function editHtmlContact(contactList) {
-    let listItemHTML = contactListHtml(contactList);
+function editHtmlContact(contact) {
+    let listItemHTML = contactHtml(contact);
     let listRow = document.querySelectorAll(CONTACT_LIST);
 
     listRow.forEach((listEl) => {
-        if (listEl.dataset.id === contactList.id) {
+        if (listEl.dataset.id === contact.id) {
             let previousElement = listEl.previousElementSibling;
             listEl.remove();
             previousElement.insertAdjacentHTML("afterend", listItemHTML);
@@ -139,14 +135,12 @@ function editHtmlContact(contactList) {
     btnSend.textContent = "Send";
 }
 
-function addContact(contactList) {
-    ContactApi.createContact(contactList)
-        .then(addHtmlContact)
-        .catch(handleError);
+function addContact(contact) {
+    ContactApi.createContact(contact).then(addHtmlContact).catch(handleError);
 }
 
-function addHtmlContact(contactList) {
-    let listItemHTML = contactListHtml(contactList);
+function addHtmlContact(contact) {
+    let listItemHTML = contactHtml(contact);
 
     listContact.insertAdjacentHTML("beforeend", listItemHTML);
 }
@@ -165,7 +159,7 @@ function onTableClick(e) {
         removeContactList(contactItem);
     }
     if (e.target.classList.contains(BTN_EDIT)) {
-        editContactList(contactItem);
+        editContact(contactItem);
     }
 }
 
@@ -174,15 +168,15 @@ function getContactListItem(item) {
 }
 
 function removeContactList(item) {
-    const id = getId(item);
+    const id = getElId(item);
 
     ContactApi.deleteContact(id).catch(handleError);
 
     item.remove();
 }
 
-function editContactList(contactItem) {
-    const id = getId(contactItem);
+function editContact(contactItem) {
+    const id = getElId(contactItem);
     const contact = getContactById(id);
     let contactValue = Object.values(contact);
     contactId = id;
@@ -200,7 +194,7 @@ function getContactById(id) {
     return serverContactList.find((contact) => contact.id === id);
 }
 
-function getId(item) {
+function getElId(item) {
     return item.dataset.id;
 }
 
