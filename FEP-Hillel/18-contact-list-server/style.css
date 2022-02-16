@@ -22,16 +22,21 @@ body {
 .list__row {
     display: flex;
     padding-bottom: 10px;
-    text-align: center;
     padding-right: 10px;
 }
 
 .list__name {
-    padding-right: 50px;
+    padding-right: 10px;
+    width: 100px;
+}
+
+.list__phone {
+    width: 100px;
 }
 
 .list__surname {
-    padding-right: 20px;
+    padding-right: 10px;
+    width: 100px;
 }
 
 .list__title {
@@ -43,7 +48,7 @@ body {
 }
 
 .input__container input {
-    width: 170px;
+    width: 100px;
 }
 
 .nyDiv {

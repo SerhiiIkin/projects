@@ -126,9 +126,7 @@ function editHtmlContact(contact) {
 
     listRow.forEach((listEl) => {
         if (listEl.dataset.id === contact.id) {
-            let previousElement = listEl.previousElementSibling;
-            listEl.remove();
-            previousElement.insertAdjacentHTML("afterend", listItemHTML);
+            listEl.outerHTML = listItemHTML;
         }
     });
 
@@ -136,7 +134,12 @@ function editHtmlContact(contact) {
 }
 
 function addContact(contact) {
-    ContactApi.createContact(contact).then(addHtmlContact).catch(handleError);
+    ContactApi.createContact(contact)
+        .then((contact) => {
+            addHtmlContact(contact);
+            serverContactList.push(contact);
+        })
+        .catch(handleError);
 }
 
 function addHtmlContact(contact) {
