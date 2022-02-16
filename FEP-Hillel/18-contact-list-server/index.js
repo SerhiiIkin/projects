@@ -136,12 +136,10 @@ function addContact(contact) {
     addHtmlContact(contact);
 
     ContactApi.createContact(contact)
+        .then(serverContactList.push(contact))
         .then((contact) => {
-            serverContactList.push(contact);
-        })
-        .then(() => {
             let listRow = getListRow();
-            listRow[listRow.length - 1].dataset.id = listRow.length;
+            listRow[listRow.length - 1].dataset.id = contact.id;
         })
         .catch(handleError);
 }
@@ -196,7 +194,7 @@ function editContact(contactItem) {
         inputEl.value = oneContactValue;
     }
 
-    btnSend.textContent = "Save and Send";
+    btnSend.textContent = "Save";
 }
 
 function getContactById(id) {
