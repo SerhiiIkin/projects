@@ -1,25 +1,16 @@
 class AlbumApi {
-    static URL_ALBUM = "https://jsonplaceholder.typicode.com/albums";
-    static URL_PHOTO = " https://jsonplaceholder.typicode.com/photos?albumId=";
+    static URL = "https://jsonplaceholder.typicode.com/";
 
     static listAlbum() {
-        return fetch(this.URL_ALBUM).then((res) => {
-            if (res.ok) {
-                return res.json();
-            }
-
-            throw new Error(`Can't get album list`);
-        });
+        return fetch(this.URL + "albums").then(this.checkRes);
     }
 
     static photoAlbum(id) {
-        return fetch(this.URL_PHOTO + id).then((res) => {
-            if (res.ok) {
-                return res.json();
-            }
+        return fetch(this.URL + "photos?albumId=" + id).then(this.checkRes);
+    }
 
-            throw new Error(`Can't get photo`);
-        });
+    static checkRes(res) {
+        return res.ok ? res.json() : new Error(`Can't get elements from list`);
     }
 }
 
