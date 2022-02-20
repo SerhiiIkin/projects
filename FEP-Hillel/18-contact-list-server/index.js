@@ -65,8 +65,6 @@ function onSubmitForm(e) {
     } else {
         addContact(contact);
     }
-
-    clear();
 }
 
 function getContact() {
@@ -115,8 +113,40 @@ function hideError() {
 }
 
 function updateContact(contact) {
-    ContactApi.updateContact(contact.id, contact).catch(handleError);
-    editHtmlContact(contact);
+    ContactApi.updateContact(contact.id, contact)
+        .then((contact) => {
+            editHtmlContact(contact);
+            clear();
+        })
+        .catch((e) => {
+            console.log(e.message);
+            BtnUpdateAgain(contact);
+        });
+}
+
+function BtnUpdateAgain(contact) {
+    let listRow = getListRow();
+    let btn = btnAgain();
+
+    listRow.forEach((listEl) => {
+        if (listEl.dataset.id === contact.id) {
+            listEl.append(btn);
+        }
+    });
+
+    btn.addEventListener("click", updateAgain);
+}
+
+function updateAgain(e) {
+    let contact = getContact();
+
+    ContactApi.updateContact(contact.id, contact)
+        .then((contact) => {
+            editHtmlContact(contact);
+            clear();
+            e.target.remove();
+        })
+        .catch(handleError);
 }
 
 function editHtmlContact(contact) {
@@ -134,14 +164,16 @@ function editHtmlContact(contact) {
 
 function addContact(contact) {
     addHtmlContact(contact);
+    clear();
 
     ContactApi.createContact(contact)
-        .then(serverContactList.push(contact))
+
         .then((contact) => {
+            serverContactList.push(contact);
             let listRow = getListRow();
             listRow[listRow.length - 1].dataset.id = contact.id;
         })
-        .catch(handleError);
+        .catch(btnSendAgain);
 }
 
 function addHtmlContact(contact) {
@@ -176,10 +208,16 @@ function removeContactList(item) {
     const id = getElId(item);
 
     ContactApi.deleteContact(id)
-        .then(serverContactList.pop())
-        .catch(handleError);
-
-    item.remove();
+        .then((contact) => {
+            if (contact.id) {
+                item.remove();
+                serverContactList.pop();
+            }
+        })
+        .catch((e) => {
+            console.log(e.message);
+            btnDelAgain(item);
+        });
 }
 
 function editContact(contactItem) {
@@ -211,4 +249,48 @@ function handleError(e) {
 
 function getListRow() {
     return document.querySelectorAll(CONTACT_LIST);
+}
+
+function btnSendAgain() {
+    let btn = btnAgain();
+    let listRow = getListRow();
+    listRow[listRow.length - 1].append(btn);
+
+    btn.addEventListener("click", sendAgain);
+}
+
+function sendAgain(e) {
+    let contact = getContact();
+
+    ContactApi.createContact(contact)
+        .then((contact) => {
+            e.target.remove();
+        })
+        .catch(handleError);
+}
+
+function btnDelAgain(item) {
+    let btn = btnAgain();
+
+    item.append(btn);
+
+    btn.addEventListener("click", delAgain);
+}
+
+function delAgain(e) {
+    let contactItem = getTargetItem(e.target);
+
+    ContactApi.deleteContact(contactItem.dataset.id).catch(handleError);
+}
+
+function getTargetItem(target) {
+    return target.closest(".list__row");
+}
+
+function btnAgain() {
+    let btn = document.createElement("button");
+    btn.classList.add("btn");
+    btn.textContent = "Try again";
+
+    return btn;
 }

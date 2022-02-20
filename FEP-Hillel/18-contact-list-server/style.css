@@ -3,6 +3,10 @@ body {
 }
 
 .btn {
+    cursor: pointer;
+    border: 0;
+    border-radius: 20px;
+    background-color: green;
     margin-right: 10px;
     margin-left: 20px;
 }
