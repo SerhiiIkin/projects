@@ -21,6 +21,8 @@ function showPhotos(id) {
 }
 
 function onAlbumListClick(e) {
+    e.preventDefault();
+
     if (e.target.classList.contains("list-album__title")) {
         const listEl = e.target;
 
