@@ -1,0 +1,29 @@
+.container {
+    display: flex;
+    flex-wrap: wrap;
+}
+.stick {
+    border: 2px solid rgb(13, 143, 57);
+    margin-left: 10px;
+    margin-top: 10px;
+    display: flex;
+    flex-direction: column;
+    padding: 5px;
+}
+
+.stick span {
+    margin-bottom: 10px;
+    align-self: flex-end;
+}
+
+.btn {
+    cursor: pointer;
+    border: 3px solid green;
+    background-color: rgb(184, 161, 161);
+    border-radius: 5px;
+    color: rgb(12, 68, 151);
+}
+
+.btn__close {
+    display: inline-block;
+}

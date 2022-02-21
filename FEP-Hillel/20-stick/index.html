@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link rel="stylesheet" href="style.css" />
+        <script
+            src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.js"
+            defer
+        ></script>
+        <script src="./index.js" type="module" defer></script>
+        <title>Document</title>
+    </head>
+
+    <body>
+        <button type="button" class="btn btn__add">Add stick</button>
+        <div class="container"></div>
+    </body>
+
+    <script type="text/template" id="stickHTML">
+
+        <div data-id="{{id}}" class="stick">
+            <span>
+                <button class="btn btn__close">&times;</button>
+            </span>
+            <textarea class="stick__text" cols="15" rows="5">{{text}}</textarea>
+        </div>
+    </script>
+</html>
