@@ -48,9 +48,7 @@ function getIdLocal(stick) {
 }
 
 function showStickers() {
-    StickersApi.stickers()
-        .then(showStickersHtml, setServerStickers)
-        .catch(handleError);
+    StickersApi.stickers().then(showStickersHtml).catch(handleError);
 }
 
 function showStickersHtml(stickers) {
