@@ -4,9 +4,6 @@ const $container = $(".container");
 const $htmlStick = $("#stickHTML").html();
 const $addBtn = $(".btn__add");
 
-let serverStickers = [];
-let stickId = null;
-
 $addBtn.on("click", onAddBtnClick);
 $container.on("click", ".btn__close", onBtnCloseClick);
 $container.on("focusout", ".stick__text", onTextAreaFocusout);
@@ -62,10 +59,6 @@ function showStickersHtml(stickers) {
 
         $($html).appendTo($container);
     });
-}
-
-function setServerStickers(stickers) {
-    serverStickers = stickers;
 }
 
 function stickHtml(stick) {
