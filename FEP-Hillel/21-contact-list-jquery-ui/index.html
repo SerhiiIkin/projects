@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link
+            rel="stylesheet"
+            href="//code.jquery.com/ui/1.13.1/themes/base/jquery-ui.css"
+        />
+        <link rel="stylesheet" href="style.css" />
+        <script src="https://code.jquery.com/jquery-3.6.0.js" defer></script>
+        <script
+            src="https://code.jquery.com/ui/1.13.1/jquery-ui.js"
+            defer
+        ></script>
+        <script src="./index.js" type="module" defer></script>
+        <title>Document</title>
+    </head>
+
+    <body>
+        <button id="create-user">Create new user</button>
+
+        <h2>My list</h2>
+
+        <div class="list">
+            <div class="list__contacts">
+                <div class="list__title">
+                    <div class="list__name">First Name</div>
+                    <div class="list__surname">Last Name</div>
+                    <div class="list__phone">Phone number</div>
+                </div>
+            </div>
+        </div>
+
+        <div id="dialog-form" title="Create new contact">
+            <form id="form">
+                <div class="input__container">
+                    <fieldset>
+                        <label for="firstName">First Name</label>
+                        <input
+                            type="text"
+                            name="firstName"
+                            id="name"
+                            class="input input__name text ui-widget-content ui-corner-all"
+                        />
+                        <label for="lastName">Last Name</label>
+                        <input
+                            type="text"
+                            name="lastName"
+                            id="email"
+                            class="input input__surname text ui-widget-content ui-corner-all"
+                        />
+                        <label for="phone">Phone</label>
+                        <input
+                            type="text"
+                            name="phone"
+                            id="phone"
+                            class="input input__phone text ui-widget-content ui-corner-all"
+                        />
+                    </fieldset>
+                </div>
+            </form>
+        </div>
+    </body>
+
+    <script class="list__item" type="text/template">
+        <div data-id="{{id}}" class="list__row">
+            <div class="list__name">{{firstName}}</div>
+            <div class="list__surname">{{lastName}}</div>
+            <div class="list__phone">{{phone}}</div>
+            <button class="btn btn__edit">Edit</button>
+            <button  class="btn btn__del">Delete</button>
+        </div>
+    </script>
+</html>

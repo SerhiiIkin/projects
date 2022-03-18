@@ -1,0 +1,67 @@
+body {
+    padding: 50px;
+}
+
+.btn {
+    cursor: pointer;
+    border: 0;
+    border-radius: 20px;
+    background-color: green;
+    margin-right: 10px;
+    margin-left: 20px;
+}
+
+.btn__add {
+    margin-top: 30px;
+}
+
+.red {
+    color: red;
+}
+
+.hide {
+    display: none;
+}
+
+.list__row {
+    display: flex;
+    padding-bottom: 10px;
+    padding-right: 10px;
+}
+
+.list__name {
+    padding-right: 10px;
+    width: 100px;
+}
+
+.list__phone {
+    width: 100px;
+}
+
+.list__surname {
+    padding-right: 10px;
+    width: 100px;
+}
+
+.list__title {
+    display: flex;
+    padding-bottom: 10px;
+}
+.input__container {
+    position: relative;
+}
+
+.input__container fieldset {
+    display: flex;
+    flex-direction: column;
+}
+
+.input__container input {
+    width: 150px;
+}
+
+.nyDiv {
+    /* position: absolute;
+    top: 25px;
+    right: 5px; */
+}
