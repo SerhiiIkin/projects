@@ -14,7 +14,7 @@ class Collection {
         });
     }
 
-    submit(value) {
+    create(value) {
         let newTodo = {
             status: false,
             title: value,

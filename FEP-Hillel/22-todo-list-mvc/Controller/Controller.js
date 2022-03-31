@@ -13,7 +13,7 @@ class Controller {
         });
         this.formView = new FormView({
             onSubmit: (value) =>
-                this.collection.submit(value).then(() => this.getList()),
+                this.collection.create(value).then(() => this.getList()),
         });
 
         this.listView.appendTo(this.$container);
