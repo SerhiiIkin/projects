@@ -25,13 +25,11 @@ function getJquery() {
 }
 
 function makeJs() {
-    return (
-        src(["./src/js/**/*.js", "!./src/js/index.js", "./src/js/index.js"])
-            .pipe(concat("app.js"))
-            //.pipe(uglify())
-            .pipe(dest("./dist"))
-            .pipe(browserSync.reload({ stream: true }))
-    );
+    return src(["./src/js/**/*.js", "!./src/js/index.js", "./src/js/index.js"])
+        .pipe(concat("app.js"))
+        .pipe(uglify())
+        .pipe(dest("./dist"))
+        .pipe(browserSync.reload({ stream: true }));
 }
 
 function makeHtml() {
