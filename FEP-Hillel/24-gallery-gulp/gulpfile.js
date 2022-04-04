@@ -6,7 +6,7 @@ const { src, dest, watch, parallel, series } = require("gulp"),
     cleanCSS = require("gulp-clean-css"),
     inject = require("gulp-inject-string"),
     autoprefixer = require("gulp-autoprefixer");
-const jquery = "node_modules/jquery/dist/jquery.js";
+const jqueryMin = "node_modules/jquery/dist/jquery.min.js";
 
 function browser() {
     browserSync({
@@ -18,8 +18,7 @@ function browser() {
 }
 
 function getJquery() {
-    return src(jquery)
-        .pipe(uglify())
+    return src(jqueryMin)
         .pipe(dest("./dist"))
         .pipe(browserSync.reload({ stream: true }));
 }
@@ -37,7 +36,7 @@ function makeHtml() {
         .pipe(
             inject.before(
                 "<title",
-                `<link rel="stylesheet" href="./style.css" />\n\t\t<script defer src="./jquery.js"></script>\n\t\t<script defer src="./app.js"></script>\n\t\t`
+                `<link rel="stylesheet" href="./style.css" />\n\t\t<script defer src="./jquery.min.js"></script>\n\t\t<script defer src="./app.js"></script>\n\t\t`
             )
         )
         .pipe(dest("./dist"))
