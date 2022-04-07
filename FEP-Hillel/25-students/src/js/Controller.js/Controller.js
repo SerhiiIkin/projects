@@ -15,8 +15,9 @@ class Controller {
         });
         this.formView = new FormView({
             onsubmit: (newStudent) => {
-                this.collection.create(newStudent);
-                this.studentsView.showOneStudentHtml(newStudent);
+                this.collection.create(newStudent).then((newStudent) => {
+                    this.getList();
+                });
             },
         });
 

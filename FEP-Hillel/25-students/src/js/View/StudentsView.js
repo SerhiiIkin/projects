@@ -53,7 +53,7 @@ class StudentsView {
     showStudentsListHtml(students) {
         const html = students.map(this.replaceHtmlStudent).join("");
 
-        this.$rootEl.append(html);
+        this.$rootEl.html(html);
     }
 
     replaceHtmlStudent(student) {
@@ -75,11 +75,5 @@ class StudentsView {
         </td>
         <td> <button class="btnDel">Delete</button></td>
     </tr>`;
-    }
-
-    showOneStudentHtml(student) {
-        const html = this.replaceHtmlStudent(student);
-
-        this.$rootEl.append(html);
     }
 }

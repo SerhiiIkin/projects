@@ -21,7 +21,7 @@ class FormView {
             marks: this.newStudentMarks(),
         };
 
-        input.value = "";
+        this.resetForm(input);
 
         this.options.onsubmit(newStudent);
     }
@@ -38,5 +38,9 @@ class FormView {
 
     appendTo($container) {
         $container.append(this.$rootEl);
+    }
+
+    resetForm(input) {
+        input.value = "";
     }
 }

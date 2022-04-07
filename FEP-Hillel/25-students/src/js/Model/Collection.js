@@ -22,11 +22,8 @@ class Collection {
     }
 
     create(newStudent) {
-        StudentsApi.create(newStudent).then(this.updateId);
-    }
-
-    updateId(newStudent) {
-        let studentEl = $("tr").last()[0];
-        studentEl.dataset.id = newStudent.id;
+        return StudentsApi.create(newStudent).then((newStudent) =>
+            this.#list.push(newStudent)
+        );
     }
 }
