@@ -1,0 +1,15 @@
+input {
+    width: 30px;
+}
+
+td {
+    padding-right: 10px;
+}
+
+.input {
+    width: 100px;
+}
+
+table {
+    margin-bottom: 20px;
+}
