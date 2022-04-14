@@ -6,7 +6,9 @@ class Controller {
     constructor($container) {
         this.$container = $container;
 
-        this.collection = new Collection();
+        this.collection = new Collection({
+            onmessage: (data) => this.chatView.showChatHtml(JSON.parse(data)),
+        });
         this.chatView = new ChatView();
 
         this.formView = new FormView({
@@ -17,11 +19,6 @@ class Controller {
 
         this.chatView.appendTo(this.$container);
         this.formView.appendTo(this.$container);
-
-        this.collection.socket.onmessage = (e) => {
-            let serverUserData = JSON.parse(e.data);
-            this.chatView.showChatHtml(serverUserData);
-        };
     }
 }
 
