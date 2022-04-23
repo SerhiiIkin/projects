@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import * as ReactDOM from "react-dom/client";
-import Form from "./Form";
+import Form from "./Form/Form";
 import List from "./List";
 
 import style from "./index.css";
@@ -8,10 +8,8 @@ import style from "./index.css";
 function App() {
     const [list, setList] = useState([]);
 
-    function submitHandler(e) {
-        e.preventDefault();
-
-        setList([...list, e.target.inputName.value]);
+    function submitHandler(e, value) {
+        setList([...list, value]);
 
         clearInput(e);
     }
@@ -21,8 +19,8 @@ function App() {
     }
 
     return (
-        <div className="container">
-            <Form style={style} onsubmit={submitHandler} />
+        <div className={style.container}>
+            <Form submit={submitHandler} />
             <List list={list} />
         </div>
     );

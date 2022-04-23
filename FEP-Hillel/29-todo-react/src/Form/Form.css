@@ -1,0 +1,16 @@
+.inputName {
+    margin-right: 10px;
+}
+
+.btn {
+    border-radius: 15px;
+    border: 0;
+    background-color: blue;
+    color: red;
+}
+
+.error {
+    padding-top: 10px;
+    color: red;
+    font-size: 12px;
+}
