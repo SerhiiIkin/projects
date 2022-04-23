@@ -33,7 +33,7 @@ function Form({ submit }) {
     }
 
     return (
-        <form onSubmit={(e) => onSubmit(e)}>
+        <form onSubmit={onSubmit}>
             <input className={style.inputName} name="inputName" type="text" />
             <button type="submit" className={style.btn}>
                 Add
