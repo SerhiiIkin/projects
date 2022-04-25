@@ -12,10 +12,15 @@ function Form({ submit }) {
 
         if (check(inputValue)) {
             clearError();
-            submit(e, inputValue);
+            submit(inputValue);
+            clearInput(e);
         } else {
             error();
         }
+    }
+
+    function clearInput(e) {
+        e.target.inputName.value = "";
     }
 
     function check(inputValue) {

@@ -8,14 +8,8 @@ import style from "./index.css";
 function App() {
     const [list, setList] = useState([]);
 
-    function submitHandler(e, value) {
+    function submitHandler(value) {
         setList([...list, value]);
-
-        clearInput(e);
-    }
-
-    function clearInput(e) {
-        e.target.inputName.value = "";
     }
 
     return (
