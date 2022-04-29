@@ -1,25 +1,60 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import TodoApi from "./TodoApi";
 
 function useTodo() {
-    const [list, setList] = useState([]);
+    const [listTodo, setListTodo] = useState([]);
     const [inputValue, setInputValue] = useState([]);
-    const errorDiv = React.useRef();
+    const [todo, setTodo] = useState([]);
+    const errorDiv = useRef();
+    const submitBtn = useRef();
 
     useEffect(() => {
         TodoApi.todoList().then((todo) => {
-            setList(todo);
+            setListTodo(todo);
         });
     }, []);
 
     function onSubmit(e) {
         e.preventDefault();
 
+        if (todo.id) {
+            updateTodo();
+        } else {
+            createTodo();
+        }
+    }
 
+    function updateTodo() {
         if (check(inputValue)) {
-            clearError();
-            submitHandler(inputValue);
+            updateHandler();
+        } else {
+            error();
+        }
+    }
+
+    function updateHandler() {
+        const updatedTodo = { title: inputValue };
+
+        clearError();
+
+        TodoApi.updateRow(todo.id, updatedTodo).then((todo) => {
+            const updatedList = listTodo.map((el) => {
+                if (el.id === todo.id) {
+                    el.title = todo.title;
+                }
+                return el;
+            });
+
+            setListTodo(updatedList);
             clearInput();
+            setTodo("");
+            submitBtn.current.textContent = "Add";
+        });
+    }
+
+    function createTodo() {
+        if (check(inputValue)) {
+            submitHandler(inputValue);
         } else {
             error();
         }
@@ -50,41 +85,46 @@ function useTodo() {
     function submitHandler(title) {
         const todo = { title, status: false };
 
+        clearError();
+
         TodoApi.createRow(todo).then((newTodo) => {
-            setList([...list, newTodo]);
+            setListTodo([...listTodo, newTodo]);
         });
+
+        clearInput();
     }
 
     function deleteItem(id) {
         TodoApi.deleteTodo(id).then(() => {
-            const newList = list.filter((item) => item.id !== id);
-            setList(newList);
-        });
-    }
-
-    function updateTodo(id, title) {
-        const newTodo = { title };
-        TodoApi.updateRow(id, newTodo).then((todo) => {
-            setList([...list, todo]);
+            const newList = listTodo.filter((item) => item.id !== id);
+            setListTodo(newList);
         });
     }
 
     function editItem(todo) {
+        setTodo(todo);
         setInputValue(todo.title);
+        submitBtn.current.textContent = "Update";
     }
 
     function changeStatus(todo) {
         todo.status = !todo.status;
-        TodoApi.updateRow(todo.id, todo).then((todo) => setTodo(todo));
+        TodoApi.updateRow(todo.id, todo).then((todo) => {
+            const updatedList = listTodo.map((el) => {
+                if (el.id === todo.id) {
+                    el.status = todo.status;
+                }
+                return el;
+            });
+
+            setListTodo(updatedList);
+            setTodo("");
+        });
     }
 
     return {
-        list,
-        submit: { onSubmit, errorDiv },
-        deleteItem,
-        updateTodo,
-        editItem,
-        changeStatus,
+        list: { listTodo, deleteItem, editItem, changeStatus },
+        submit: { onSubmit, errorDiv, submitBtn },
         input: { inputValue, setInputValue, inputHandler },
     };
 }

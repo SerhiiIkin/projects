@@ -1,11 +1,11 @@
 import React from "react";
 import ListItem from "./ListItem";
 
-function List({ list, deleteItem, editItem, changeStatus }) {
+function List({ list }) {
     return (
         <ul>
-            {list.map((el) => (
-                <ListItem key={el.id} todo={el} editItem={editItem} deleteItem={deleteItem} changeStatus={changeStatus} />
+            {list.listTodo.map((el) => (
+                <ListItem key={el.id} todo={el} list={list} />
             ))}
         </ul>
     );

@@ -12,7 +12,7 @@ function Form({ submit, input }) {
                 name="inputName"
                 type="text"
             />
-            <button type="submit" className={style.btn}>
+            <button type="submit" ref={submit.submitBtn} className={style.btn}>
                 Add
             </button>
             <div className={style.error} ref={submit.errorDiv}></div>
