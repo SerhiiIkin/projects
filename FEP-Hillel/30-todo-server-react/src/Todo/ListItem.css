@@ -1,0 +1,12 @@
+.btn {
+    margin-left: 10px;
+    border: 0;
+    border-radius: 4px;
+    background-color: green;
+    cursor: pointer;
+}
+
+.active {
+    background-color: blue;
+    color: red;
+}
