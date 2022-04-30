@@ -61,7 +61,8 @@ function useTodo() {
     }
 
     function inputHandler(e) {
-        setInputValue(e.target.value);
+        const inputValue = e.target.value;
+        setInputValue(inputValue);
     }
 
     function clearInput() {
