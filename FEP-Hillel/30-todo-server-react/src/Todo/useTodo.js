@@ -1,12 +1,9 @@
-import React, { useState, useEffect, useRef } from "react";
+import { useState, useEffect } from "react";
 import TodoApi from "./TodoApi";
 
 function useTodo() {
     const [listTodo, setListTodo] = useState([]);
-    const [inputValue, setInputValue] = useState([]);
     const [todo, setTodo] = useState([]);
-    const errorDiv = useRef();
-    const submitBtn = useRef();
 
     useEffect(() => {
         TodoApi.todoList().then((todo) => {
@@ -14,28 +11,8 @@ function useTodo() {
         });
     }, []);
 
-    function onSubmit(e) {
-        e.preventDefault();
-
-        if (todo.id) {
-            updateTodo();
-        } else {
-            createTodo();
-        }
-    }
-
-    function updateTodo() {
-        if (check(inputValue)) {
-            updateHandler();
-        } else {
-            error();
-        }
-    }
-
-    function updateHandler() {
+    function updateHandler(inputValue) {
         const updatedTodo = { title: inputValue };
-
-        clearError();
 
         TodoApi.updateRow(todo.id, updatedTodo).then((todo) => {
             const updatedList = listTodo.map((el) => {
@@ -46,53 +23,17 @@ function useTodo() {
             });
 
             setListTodo(updatedList);
-            clearInput();
-            setTodo("");
-            submitBtn.current.textContent = "Add";
         });
+
+        setTodo("");
     }
 
-    function createTodo() {
-        if (check(inputValue)) {
-            submitHandler(inputValue);
-        } else {
-            error();
-        }
-    }
-
-    function inputHandler(e) {
-        const inputValue = e.target.value;
-        setInputValue(inputValue);
-    }
-
-    function clearInput() {
-        setInputValue("");
-    }
-
-    function check(inputValue) {
-        const checkValue = /^[a-z0-9A-Z]+$/i;
-
-        return checkValue.test(inputValue);
-    }
-
-    function error() {
-        errorDiv.current.textContent = "You can enter symbol or numbers only!";
-    }
-
-    function clearError() {
-        errorDiv.current.textContent = "";
-    }
-
-    function submitHandler(title) {
-        const todo = { title, status: false };
-
-        clearError();
+    function submitHandler(inputValue) {
+        const todo = { title: inputValue, status: false };
 
         TodoApi.createRow(todo).then((newTodo) => {
             setListTodo([...listTodo, newTodo]);
         });
-
-        clearInput();
     }
 
     function deleteItem(id) {
@@ -104,8 +45,6 @@ function useTodo() {
 
     function editItem(todo) {
         setTodo(todo);
-        setInputValue(todo.title);
-        submitBtn.current.textContent = "Update";
     }
 
     function changeStatus(todo) {
@@ -119,14 +58,17 @@ function useTodo() {
             });
 
             setListTodo(updatedList);
-            setTodo("");
         });
     }
 
     return {
-        list: { listTodo, deleteItem, editItem, changeStatus },
-        submit: { onSubmit, errorDiv, submitBtn },
-        input: { inputValue, setInputValue, inputHandler },
+        listTodo,
+        updateHandler,
+        submitHandler,
+        deleteItem,
+        changeStatus,
+        editItem,
+        todo,
     };
 }
 
