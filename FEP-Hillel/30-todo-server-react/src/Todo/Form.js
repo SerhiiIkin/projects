@@ -7,12 +7,10 @@ const isName_Number = /^[a-z0-9A-Z]+$/i;
 function Form({ updateHandler, submitHandler, todo }) {
     const [inputValue, setInputValue] = useState("");
     const [error, setError] = useState("");
-    const [nameSubmitBtn, setNameSubmitBtn] = useState("Add");
 
     useEffect(() => {
         if (todo.title) {
             setInputValue(todo.title);
-            setNameSubmitBtn("Update");
         }
     }, [todo.title]);
 
@@ -30,7 +28,6 @@ function Form({ updateHandler, submitHandler, todo }) {
         if (isValidInput(inputValue)) {
             updateHandler(inputValue);
             setInputValue("");
-            setNameSubmitBtn("Add");
         }
     }
 
@@ -62,7 +59,7 @@ function Form({ updateHandler, submitHandler, todo }) {
                 type="text"
             />
             <button type="submit" name="submitBtn" className={style.btn}>
-                {nameSubmitBtn}
+                {Boolean(todo.title) ? "Update" : "Add"}
             </button>
 
             {error ? (
