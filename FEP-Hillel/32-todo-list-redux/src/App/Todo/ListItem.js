@@ -1,8 +1,11 @@
-import React from "react";
+import React, { useContext } from "react";
+import { Context } from "./Todo";
 
 import style from "./ListItem.css";
 
-function ListItem({ todo, editItem, changeStatus, deleteItem }) {
+function ListItem({ todo }) {
+    const { changeStatus, deleteItem, editItem } = useContext(Context);
+
     return (
         <li>
             <span

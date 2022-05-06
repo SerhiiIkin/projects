@@ -5,6 +5,8 @@ import useTodo from "./useTodo";
 
 import style from "./Todo.css";
 
+export const Context = React.createContext();
+
 function Todo() {
     const {
         updateHandler,
@@ -14,19 +16,22 @@ function Todo() {
         editItem,
         todo,
     } = useTodo();
+
     return (
-        <div className={style.container}>
-            <Form
-                updateHandler={updateHandler}
-                submitHandler={submitHandler}
-                todo={todo}
-            />
-            <List
-                changeStatus={changeStatus}
-                editItem={editItem}
-                deleteItem={deleteItem}
-            />
-        </div>
+        <Context.Provider
+            value={{
+                updateHandler,
+                submitHandler,
+                deleteItem,
+                changeStatus,
+                editItem,
+                todo,
+            }}>
+            <div className={style.container}>
+                <Form />
+                <List />
+            </div>
+        </Context.Provider>
     );
 }
 

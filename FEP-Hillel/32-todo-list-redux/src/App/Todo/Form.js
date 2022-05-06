@@ -1,10 +1,12 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
+import { Context } from "./Todo";
 
 import style from "./Form.css";
 
 const isName_Number = /^[a-z0-9A-Z]+$/i;
 
-function Form({ updateHandler, submitHandler, todo }) {
+function Form() {
+    const {todo, updateHandler, submitHandler} = useContext(Context);
     const [inputValue, setInputValue] = useState("");
     const [error, setError] = useState("");
 
