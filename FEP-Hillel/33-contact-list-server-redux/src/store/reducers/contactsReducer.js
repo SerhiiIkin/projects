@@ -36,9 +36,10 @@ function contactsReducer(state = initialState, { type, payload }) {
                 ...state,
                 listContact: state.listContact.map((contact) => {
                     if (contact.id === payload.id) {
-                        contact.firstName = payload.firstName;
-                        contact.lastName = payload.lastName;
-                        contact.phone = payload.phone;
+                        return {
+                            ...contact,
+                            ...payload,
+                        };
                     }
                     return contact;
                 }),
