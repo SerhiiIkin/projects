@@ -1,0 +1,13 @@
+span {
+    margin-right: 10px;
+    display: inline-flex;
+    width: 90px;
+}
+li {
+    list-style: none;
+    margin-bottom: 10px;
+}
+
+.list {
+    padding: 0;
+}
