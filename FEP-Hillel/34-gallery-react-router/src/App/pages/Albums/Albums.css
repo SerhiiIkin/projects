@@ -1,0 +1,15 @@
+.albums__container {
+    display: flex;
+    flex: 0 0 75%;
+}
+.album__list {
+    flex: 0 0 40%;
+}
+
+.album__list div {
+    padding-bottom: 10px;
+}
+
+.album__photos {
+    flex: 0 0 50%;
+}

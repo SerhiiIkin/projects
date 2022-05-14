@@ -1,0 +1,6 @@
+.user__container {
+    display: flex;
+}
+.users__list {
+    flex: 0 0 25%;
+}
