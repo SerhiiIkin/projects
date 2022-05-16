@@ -1,0 +1,8 @@
+.input {
+    margin-bottom: 30px;
+    position: relative;
+}
+.error {
+    color: red;
+    position: absolute;
+}
