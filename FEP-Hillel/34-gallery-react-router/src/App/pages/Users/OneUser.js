@@ -9,7 +9,7 @@ function OneUser({ user }) {
             <span>{user.name} </span>
             <button className="btn btn-warning">
                 <Link
-                    to={{ pathname: "/albums", search: `?userId=${user.id}` }}>
+                    to={{ pathname: "/userList/albums", search: `?userId=${user.id}` }}>
                     Album
                 </Link>
             </button>

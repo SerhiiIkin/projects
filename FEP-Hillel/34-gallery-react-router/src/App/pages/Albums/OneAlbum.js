@@ -11,7 +11,7 @@ function OneAlbum({ album }) {
             <button className="btn btn-danger">
                 <Link
                     to={{
-                        pathname: "/albums/photos",
+                        pathname: "/userList/albums/photos",
                         search: `?userId=${id}&albumId=${album.id}`,
                     }}>
                     Photo
